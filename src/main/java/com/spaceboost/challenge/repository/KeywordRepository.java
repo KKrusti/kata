@@ -2,7 +2,8 @@ package com.spaceboost.challenge.repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.spaceboost.challenge.model.Campaign;
+import com.spaceboost.challenge.model.AdGroup;
+import com.spaceboost.challenge.model.Keyword;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Repository;
@@ -16,20 +17,20 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
-public class CampaignRepository implements ChallengeRepository<Campaign> {
+public class KeywordRepository implements ChallengeRepository<Keyword> {
 
     @Autowired
     private ResourceLoader resourceLoader;
 
-    private Map<Integer, Campaign> storedCampaign = new ConcurrentHashMap<>();
+    private Map<Integer, Keyword> storedKeyword = new ConcurrentHashMap<>();
 
     @Override
-    public Optional<Campaign> findById(int id) {
+    public Optional<Keyword> findById(int id) {
         return Optional.empty();
     }
 
     @Override
-    public Campaign create(Campaign object) {
+    public Keyword create(Keyword object) {
         return null;
     }
 
@@ -39,23 +40,21 @@ public class CampaignRepository implements ChallengeRepository<Campaign> {
     }
 
     @Override
-    public Campaign update(Campaign object) {
+    public Keyword update(Keyword object) {
         return null;
     }
 
     @Override
-    public List<Campaign> getAll() {
-        return (List<Campaign>) storedCampaign.values();
+    public List<Keyword> getAll() {
+        return (List<Keyword>) storedKeyword.values();
     }
 
+    @Override
     @PostConstruct
     public void init() throws IOException {
         final ObjectMapper jsonMapper = new ObjectMapper();
-        final File repositoryJsonFile = resourceLoader.getResource("classpath:entities/campaigns.json").getFile();
-        final List<Campaign> loadedCampaignList = jsonMapper.readValue(repositoryJsonFile, new TypeReference<List<Campaign>>(){});
-        loadedCampaignList.forEach( campaign -> storedCampaign.put(campaign.getId(), campaign));
+        final File repositoryJsonFile = resourceLoader.getResource("classpath:entities/keywords.json").getFile();
+        final List<Keyword> loadedKeywordList = jsonMapper.readValue(repositoryJsonFile, new TypeReference<List<Keyword>>(){});
+        loadedKeywordList.forEach( keyword -> storedKeyword.put(keyword.getId(), keyword));
     }
-
-
 }
-

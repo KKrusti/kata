@@ -2,7 +2,7 @@ package com.spaceboost.challenge.repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.spaceboost.challenge.model.Campaign;
+import com.spaceboost.challenge.model.AdGroup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Repository;
@@ -16,20 +16,20 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
-public class CampaignRepository implements ChallengeRepository<Campaign> {
+public class AdGroupRepository implements ChallengeRepository<AdGroup> {
 
     @Autowired
     private ResourceLoader resourceLoader;
 
-    private Map<Integer, Campaign> storedCampaign = new ConcurrentHashMap<>();
+    private Map<Integer, AdGroup> storedAdGroup = new ConcurrentHashMap<>();
 
     @Override
-    public Optional<Campaign> findById(int id) {
+    public Optional<AdGroup> findById(int id) {
         return Optional.empty();
     }
 
     @Override
-    public Campaign create(Campaign object) {
+    public AdGroup create(AdGroup object) {
         return null;
     }
 
@@ -39,23 +39,21 @@ public class CampaignRepository implements ChallengeRepository<Campaign> {
     }
 
     @Override
-    public Campaign update(Campaign object) {
+    public AdGroup update(AdGroup object) {
         return null;
     }
 
     @Override
-    public List<Campaign> getAll() {
-        return (List<Campaign>) storedCampaign.values();
+    public List<AdGroup> getAll() {
+        return (List<AdGroup>) storedAdGroup.values();
     }
 
+    @Override
     @PostConstruct
     public void init() throws IOException {
         final ObjectMapper jsonMapper = new ObjectMapper();
-        final File repositoryJsonFile = resourceLoader.getResource("classpath:entities/campaigns.json").getFile();
-        final List<Campaign> loadedCampaignList = jsonMapper.readValue(repositoryJsonFile, new TypeReference<List<Campaign>>(){});
-        loadedCampaignList.forEach( campaign -> storedCampaign.put(campaign.getId(), campaign));
+        final File repositoryJsonFile = resourceLoader.getResource("classpath:entities/adGroups.json").getFile();
+        final List<AdGroup> loadedAdGroupList = jsonMapper.readValue(repositoryJsonFile, new TypeReference<List<AdGroup>>(){});
+        loadedAdGroupList.forEach( adgroup -> storedAdGroup.put(adgroup.getId(), adgroup));
     }
-
-
 }
-

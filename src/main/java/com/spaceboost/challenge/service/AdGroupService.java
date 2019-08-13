@@ -1,22 +1,22 @@
 package com.spaceboost.challenge.service;
 
+import com.spaceboost.challenge.model.AdGroup;
 import com.spaceboost.challenge.model.Campaign;
-import com.spaceboost.challenge.model.Keyword;
+import com.spaceboost.challenge.repository.AdGroupRepository;
 import com.spaceboost.challenge.repository.CampaignRepository;
-import com.spaceboost.challenge.repository.KeywordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class KeywordService {
+public class AdGroupService {
 
     @Autowired
-    private KeywordRepository keywordRepository;
+    private AdGroupRepository adGroupRepository;
 
-    public List<Keyword> getAllKeywords(){
-        return keywordRepository.getAll();
+    public List<AdGroup> getAllAdGroups(){
+        return adGroupRepository.getAll();
     }
 //
 //    public CampaignService(CampaignRepository campaignRepository){

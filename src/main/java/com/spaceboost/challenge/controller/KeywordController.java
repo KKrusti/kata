@@ -1,17 +1,16 @@
 package com.spaceboost.challenge.controller;
 
-import com.spaceboost.challenge.service.CampaignService;
+import com.spaceboost.challenge.service.KeywordService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(value = "/campaigns")
-public class CampaignController {
+@RequestMapping(value = "/keywords")
+public class KeywordController {
 
     @Autowired
-    private CampaignService campaignService;
+    private KeywordService keywordService;
 
 //    @Autowired
 //    public CampaignController(CampaignService campaignService) {
