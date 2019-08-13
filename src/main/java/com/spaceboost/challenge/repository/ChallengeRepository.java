@@ -13,10 +13,6 @@ public interface ChallengeRepository<T> {
 
     T create(T object);
 
-    boolean delete(int id);
-
-    T update(T object);
-
     List<T> getAll();
 
     @PostConstruct

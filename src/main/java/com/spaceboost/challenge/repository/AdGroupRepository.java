@@ -40,16 +40,6 @@ public class AdGroupRepository implements ChallengeRepository<AdGroup> {
     }
 
     @Override
-    public boolean delete(int id) {
-        return false;
-    }
-
-    @Override
-    public AdGroup update(AdGroup object) {
-        return null;
-    }
-
-    @Override
     public List<AdGroup> getAll() {
         return new ArrayList<>(storedAdGroup.values());
     }

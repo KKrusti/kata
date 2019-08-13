@@ -40,16 +40,6 @@ public class KeywordRepository implements ChallengeRepository<Keyword> {
     }
 
     @Override
-    public boolean delete(int id) {
-        return false;
-    }
-
-    @Override
-    public Keyword update(Keyword object) {
-        return null;
-    }
-
-    @Override
     public List<Keyword> getAll() {
         return new ArrayList<>(storedKeyword.values());
     }

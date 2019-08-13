@@ -40,16 +40,6 @@ public class CampaignRepository implements ChallengeRepository<Campaign> {
     }
 
     @Override
-    public boolean delete(int id) {
-        return false;
-    }
-
-    @Override
-    public Campaign update(Campaign object) {
-        return null;
-    }
-
-    @Override
     public List<Campaign> getAll() {
         return new ArrayList<>(storedCampaign.values());
     }
