@@ -2,6 +2,7 @@ package com.spaceboost.challenge.repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.spaceboost.challenge.exception.CampaignNotFoundException;
 import com.spaceboost.challenge.model.Campaign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -24,7 +26,12 @@ public class CampaignRepository implements ChallengeRepository<Campaign> {
 
     @Override
     public Campaign findById(int id) {
-        return null;
+        Campaign campaign = storedCampaign.get(id);
+        if (campaign != null) {
+            return campaign;
+        } else {
+            throw new CampaignNotFoundException(id);
+        }
     }
 
     @Override
@@ -44,7 +51,7 @@ public class CampaignRepository implements ChallengeRepository<Campaign> {
 
     @Override
     public List<Campaign> getAll() {
-        return (List<Campaign>) storedCampaign.values();
+        return new ArrayList<>(storedCampaign.values());
     }
 
     @PostConstruct

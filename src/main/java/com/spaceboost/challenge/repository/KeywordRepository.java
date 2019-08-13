@@ -2,6 +2,7 @@ package com.spaceboost.challenge.repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.spaceboost.challenge.exception.KeywordNotFoundException;
 import com.spaceboost.challenge.model.Keyword;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -24,7 +26,12 @@ public class KeywordRepository implements ChallengeRepository<Keyword> {
 
     @Override
     public Keyword findById(int id) {
-        return null;
+        Keyword keyword = storedKeyword.get(id);
+        if (keyword != null) {
+            return keyword;
+        } else {
+            throw new KeywordNotFoundException(id);
+        }
     }
 
     @Override
@@ -44,7 +51,7 @@ public class KeywordRepository implements ChallengeRepository<Keyword> {
 
     @Override
     public List<Keyword> getAll() {
-        return (List<Keyword>) storedKeyword.values();
+        return new ArrayList<>(storedKeyword.values());
     }
 
     @Override

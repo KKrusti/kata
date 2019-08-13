@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -50,7 +51,7 @@ public class AdGroupRepository implements ChallengeRepository<AdGroup> {
 
     @Override
     public List<AdGroup> getAll() {
-        return (List<AdGroup>) storedAdGroup.values();
+        return new ArrayList<>(storedAdGroup.values());
     }
 
     @Override

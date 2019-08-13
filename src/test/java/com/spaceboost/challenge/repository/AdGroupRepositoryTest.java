@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.List;
+
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = AdGroupRepository.class)
 public class AdGroupRepositoryTest {
@@ -31,5 +33,12 @@ public class AdGroupRepositoryTest {
         Assertions.assertThrows(AdGroupNotFoundException.class, () -> {
             adGroupRepository.findById(NON_EXISTING_ADGROUP_ID);
         });
+    }
+
+    @Test
+    public void withExistingDataInJson_getAll_adGroupsFound() {
+        List<AdGroup> adGroups = adGroupRepository.getAll();
+
+        Assertions.assertTrue(!adGroups.isEmpty());
     }
 }
