@@ -20,6 +20,7 @@ public class KeywordRepositoryTest {
 
     private static final int EXISTING_KEYWORD_ID = 3;
     private static final int NON_EXISTING_KEYWORD_ID = 99999;
+    private static final int MOST_CLICKED_ID = 27;
 
     @Test
     public void withExistingKeyword_findById_keywordFound() {
@@ -40,5 +41,12 @@ public class KeywordRepositoryTest {
         List<Keyword> keywords = keywordRepository.getAll();
 
         Assertions.assertTrue(!keywords.isEmpty());
+    }
+
+    @Test
+    public void withExistingDataInJson_getMostClick_keywordReturned() {
+        Keyword keyword = keywordRepository.getMostClicked();
+
+        Assertions.assertEquals(MOST_CLICKED_ID, keyword.getId());
     }
 }

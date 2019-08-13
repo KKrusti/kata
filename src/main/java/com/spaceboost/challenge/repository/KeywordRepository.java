@@ -12,6 +12,7 @@ import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -42,6 +43,10 @@ public class KeywordRepository implements ChallengeRepository<Keyword> {
     @Override
     public List<Keyword> getAll() {
         return new ArrayList<>(storedKeyword.values());
+    }
+
+    public Keyword getMostClicked() {
+        return storedKeyword.entrySet().stream().map(Map.Entry::getValue).max(Comparator.comparing(Keyword::getClicks)).orElseThrow(() -> new IllegalArgumentException());
     }
 
     @Override

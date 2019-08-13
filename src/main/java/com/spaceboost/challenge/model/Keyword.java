@@ -2,6 +2,7 @@ package com.spaceboost.challenge.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
 public class Keyword {
 
     @Id
@@ -20,4 +22,5 @@ public class Keyword {
     private int clicks;
     private int conversions;
     private float cost;
+
 }
