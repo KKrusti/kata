@@ -1,0 +1,9 @@
+G:\knowledge-backend-test-master\knowledge-backend-test-master\src\main\java\com\spaceboost\challenge\Application.java
+G:\knowledge-backend-test-master\knowledge-backend-test-master\src\main\java\com\spaceboost\challenge\model\campaign\Campaign.java
+G:\knowledge-backend-test-master\knowledge-backend-test-master\src\main\java\com\spaceboost\challenge\model\adGroup\AdGroup.java
+G:\knowledge-backend-test-master\knowledge-backend-test-master\src\main\java\com\spaceboost\challenge\config\CampaignPopulator.java
+G:\knowledge-backend-test-master\knowledge-backend-test-master\src\main\java\com\spaceboost\challenge\repository\CampaignRepository.java
+G:\knowledge-backend-test-master\knowledge-backend-test-master\src\main\java\com\spaceboost\challenge\service\KeywordService.java
+G:\knowledge-backend-test-master\knowledge-backend-test-master\src\main\java\com\spaceboost\challenge\controller\CampaignController.java
+G:\knowledge-backend-test-master\knowledge-backend-test-master\src\main\java\com\spaceboost\challenge\model\keyword\Keyword.java
+G:\knowledge-backend-test-master\knowledge-backend-test-master\src\main\java\com\spaceboost\challenge\exception\CampaignNotFoundException.java

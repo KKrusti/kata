@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ba7f051f-3094-401d-8615-6090fd748980" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="F:/development/apache-maven-3.6.1" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+        <option name="jdkForImporter" value="1.8" />
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1P70dRXzw6AJ5TeYIoJ3BkpbFlF" />
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/src/test/java/com/spaceboost/challenge" />
+    <property name="last_opened_file_path" value="F:/development/seed-springboot/pom.xml" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.spaceboost.challenge.repository" />
+      <recent name="com.spaceboost.challenge.service" />
+      <recent name="com.spaceboost.challenge.campaign" />
+      <recent name="com.spaceboost.challenge" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.spaceboost.challenge.service" />
+      <recent name="com.spaceboost.challenge.config" />
+      <recent name="com.spaceboost.challenge.exception" />
+      <recent name="com.spaceboost.challenge.controller" />
+      <recent name="com.spaceboost.challenge.repository" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.spaceboost.challenge.service" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.Application">
+    <configuration name="CampaignControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="code-challenge" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.spaceboost.challenge.campaign.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.spaceboost.challenge.campaign" />
+      <option name="MAIN_CLASS_NAME" value="com.spaceboost.challenge.campaign.CampaignControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="code-challenge" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.spaceboost.challenge.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.CampaignControllerTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ba7f051f-3094-401d-8615-6090fd748980" name="Default Changelist" comment="" />
+      <created>1565209914950</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1565209914950</updated>
+      <workItem from="1565209917554" duration="386000" />
+      <workItem from="1565210316277" duration="64000" />
+      <workItem from="1565210393198" duration="120000" />
+      <workItem from="1565210530728" duration="1394000" />
+      <workItem from="1565211956445" duration="7597000" />
+      <workItem from="1565291274206" duration="3861000" />
+      <workItem from="1565301461263" duration="3537000" />
+      <workItem from="1565343256001" duration="4608000" />
+      <workItem from="1565716060885" duration="251000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+</project>
