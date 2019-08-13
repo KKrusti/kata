@@ -12,7 +12,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
@@ -24,8 +23,8 @@ public class CampaignRepository implements ChallengeRepository<Campaign> {
     private Map<Integer, Campaign> storedCampaign = new ConcurrentHashMap<>();
 
     @Override
-    public Optional<Campaign> findById(int id) {
-        return Optional.empty();
+    public Campaign findById(int id) {
+        return null;
     }
 
     @Override
@@ -52,8 +51,9 @@ public class CampaignRepository implements ChallengeRepository<Campaign> {
     public void init() throws IOException {
         final ObjectMapper jsonMapper = new ObjectMapper();
         final File repositoryJsonFile = resourceLoader.getResource("classpath:entities/campaigns.json").getFile();
-        final List<Campaign> loadedCampaignList = jsonMapper.readValue(repositoryJsonFile, new TypeReference<List<Campaign>>(){});
-        loadedCampaignList.forEach( campaign -> storedCampaign.put(campaign.getId(), campaign));
+        final List<Campaign> loadedCampaignList = jsonMapper.readValue(repositoryJsonFile, new TypeReference<List<Campaign>>() {
+        });
+        loadedCampaignList.forEach(campaign -> storedCampaign.put(campaign.getId(), campaign));
     }
 
 

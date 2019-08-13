@@ -2,6 +2,7 @@ package com.spaceboost.challenge.repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.spaceboost.challenge.exception.AdGroupNotFoundException;
 import com.spaceboost.challenge.model.AdGroup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
@@ -12,7 +13,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
@@ -24,8 +24,13 @@ public class AdGroupRepository implements ChallengeRepository<AdGroup> {
     private Map<Integer, AdGroup> storedAdGroup = new ConcurrentHashMap<>();
 
     @Override
-    public Optional<AdGroup> findById(int id) {
-        return Optional.empty();
+    public AdGroup findById(int id) {
+        AdGroup adGroup = storedAdGroup.get(id);
+        if (adGroup != null) {
+            return adGroup;
+        } else {
+            throw new AdGroupNotFoundException(id);
+        }
     }
 
     @Override
@@ -53,7 +58,8 @@ public class AdGroupRepository implements ChallengeRepository<AdGroup> {
     public void init() throws IOException {
         final ObjectMapper jsonMapper = new ObjectMapper();
         final File repositoryJsonFile = resourceLoader.getResource("classpath:entities/adGroups.json").getFile();
-        final List<AdGroup> loadedAdGroupList = jsonMapper.readValue(repositoryJsonFile, new TypeReference<List<AdGroup>>(){});
-        loadedAdGroupList.forEach( adgroup -> storedAdGroup.put(adgroup.getId(), adgroup));
+        final List<AdGroup> loadedAdGroupList = jsonMapper.readValue(repositoryJsonFile, new TypeReference<List<AdGroup>>() {
+        });
+        loadedAdGroupList.forEach(adgroup -> storedAdGroup.put(adgroup.getId(), adgroup));
     }
 }

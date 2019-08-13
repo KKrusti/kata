@@ -2,7 +2,6 @@ package com.spaceboost.challenge.repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.spaceboost.challenge.model.AdGroup;
 import com.spaceboost.challenge.model.Keyword;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
@@ -13,7 +12,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
@@ -25,8 +23,8 @@ public class KeywordRepository implements ChallengeRepository<Keyword> {
     private Map<Integer, Keyword> storedKeyword = new ConcurrentHashMap<>();
 
     @Override
-    public Optional<Keyword> findById(int id) {
-        return Optional.empty();
+    public Keyword findById(int id) {
+        return null;
     }
 
     @Override
@@ -54,7 +52,8 @@ public class KeywordRepository implements ChallengeRepository<Keyword> {
     public void init() throws IOException {
         final ObjectMapper jsonMapper = new ObjectMapper();
         final File repositoryJsonFile = resourceLoader.getResource("classpath:entities/keywords.json").getFile();
-        final List<Keyword> loadedKeywordList = jsonMapper.readValue(repositoryJsonFile, new TypeReference<List<Keyword>>(){});
-        loadedKeywordList.forEach( keyword -> storedKeyword.put(keyword.getId(), keyword));
+        final List<Keyword> loadedKeywordList = jsonMapper.readValue(repositoryJsonFile, new TypeReference<List<Keyword>>() {
+        });
+        loadedKeywordList.forEach(keyword -> storedKeyword.put(keyword.getId(), keyword));
     }
 }
