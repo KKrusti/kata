@@ -19,10 +19,20 @@ import java.util.concurrent.ConcurrentHashMap;
 @Repository
 public class CampaignRepository implements ChallengeRepository<Campaign> {
 
+    private static final String JSON_PATH = "classpath:entities/campaigns.json";
     @Autowired
     private ResourceLoader resourceLoader;
-
     private Map<Integer, Campaign> storedCampaign = new ConcurrentHashMap<>();
+
+    @PostConstruct
+    @Override
+    public void init() throws IOException {
+        final ObjectMapper jsonMapper = new ObjectMapper();
+        final File repositoryJsonFile = resourceLoader.getResource(JSON_PATH).getFile();
+        List<Campaign> loadedCampaignList = jsonMapper.readValue(repositoryJsonFile, new TypeReference<List<Campaign>>() {
+        });
+        loadedCampaignList.forEach(campaign -> storedCampaign.put(campaign.getId(), campaign));
+    }
 
     @Override
     public Campaign findById(int id) {
@@ -43,16 +53,6 @@ public class CampaignRepository implements ChallengeRepository<Campaign> {
     public List<Campaign> getAll() {
         return new ArrayList<>(storedCampaign.values());
     }
-
-    @PostConstruct
-    public void init() throws IOException {
-        final ObjectMapper jsonMapper = new ObjectMapper();
-        final File repositoryJsonFile = resourceLoader.getResource("classpath:entities/campaigns.json").getFile();
-        final List<Campaign> loadedCampaignList = jsonMapper.readValue(repositoryJsonFile, new TypeReference<List<Campaign>>() {
-        });
-        loadedCampaignList.forEach(campaign -> storedCampaign.put(campaign.getId(), campaign));
-    }
-
 
 }
 

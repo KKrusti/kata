@@ -19,10 +19,20 @@ import java.util.concurrent.ConcurrentHashMap;
 @Repository
 public class AdGroupRepository implements ChallengeRepository<AdGroup> {
 
+    private static final String JSON_PATH = "classpath:entities/adGroups.json";
     @Autowired
     private ResourceLoader resourceLoader;
-
     private Map<Integer, AdGroup> storedAdGroup = new ConcurrentHashMap<>();
+
+    @Override
+    @PostConstruct
+    public void init() throws IOException {
+        final ObjectMapper jsonMapper = new ObjectMapper();
+        final File repositoryJsonFile = resourceLoader.getResource(JSON_PATH).getFile();
+        List<AdGroup> loadedAdGroupList = jsonMapper.readValue(repositoryJsonFile, new TypeReference<List<AdGroup>>() {
+        });
+        loadedAdGroupList.forEach(adgroup -> storedAdGroup.put(adgroup.getId(), adgroup));
+    }
 
     @Override
     public AdGroup findById(int id) {
@@ -44,13 +54,4 @@ public class AdGroupRepository implements ChallengeRepository<AdGroup> {
         return new ArrayList<>(storedAdGroup.values());
     }
 
-    @Override
-    @PostConstruct
-    public void init() throws IOException {
-        final ObjectMapper jsonMapper = new ObjectMapper();
-        final File repositoryJsonFile = resourceLoader.getResource("classpath:entities/adGroups.json").getFile();
-        final List<AdGroup> loadedAdGroupList = jsonMapper.readValue(repositoryJsonFile, new TypeReference<List<AdGroup>>() {
-        });
-        loadedAdGroupList.forEach(adgroup -> storedAdGroup.put(adgroup.getId(), adgroup));
-    }
 }

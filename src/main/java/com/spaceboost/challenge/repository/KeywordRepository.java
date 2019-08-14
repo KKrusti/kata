@@ -20,10 +20,20 @@ import java.util.concurrent.ConcurrentHashMap;
 @Repository
 public class KeywordRepository implements ChallengeRepository<Keyword> {
 
+    private static final String JSON_PATH = "classpath:entities/keywords.json";
     @Autowired
     private ResourceLoader resourceLoader;
-
     private Map<Integer, Keyword> storedKeyword = new ConcurrentHashMap<>();
+
+    @Override
+    @PostConstruct
+    public void init() throws IOException {
+        final ObjectMapper jsonMapper = new ObjectMapper();
+        final File repositoryJsonFile = resourceLoader.getResource(JSON_PATH).getFile();
+        List<Keyword> loadedKeywordList = jsonMapper.readValue(repositoryJsonFile, new TypeReference<List<Keyword>>() {
+        });
+        loadedKeywordList.forEach(keyword -> storedKeyword.put(keyword.getId(), keyword));
+    }
 
     @Override
     public Keyword findById(int id) {
@@ -47,15 +57,5 @@ public class KeywordRepository implements ChallengeRepository<Keyword> {
 
     public Keyword getMostClicked() {
         return storedKeyword.entrySet().stream().map(Map.Entry::getValue).max(Comparator.comparing(Keyword::getClicks)).orElseThrow(() -> new IllegalArgumentException());
-    }
-
-    @Override
-    @PostConstruct
-    public void init() throws IOException {
-        final ObjectMapper jsonMapper = new ObjectMapper();
-        final File repositoryJsonFile = resourceLoader.getResource("classpath:entities/keywords.json").getFile();
-        final List<Keyword> loadedKeywordList = jsonMapper.readValue(repositoryJsonFile, new TypeReference<List<Keyword>>() {
-        });
-        loadedKeywordList.forEach(keyword -> storedKeyword.put(keyword.getId(), keyword));
     }
 }

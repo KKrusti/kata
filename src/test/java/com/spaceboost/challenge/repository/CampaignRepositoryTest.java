@@ -23,9 +23,9 @@ public class CampaignRepositoryTest {
 
     @Test
     public void withExistingCampaign_findById_campaignFound() {
-        Campaign campaign = campaignRepository.findById(EXISTING_CAMPAIGN_ID);
-
-        Assertions.assertNotNull(campaign);
+        Campaign retrievedCampaign = campaignRepository.findById(EXISTING_CAMPAIGN_ID);
+        Campaign expectedCampaign = new Campaign(EXISTING_CAMPAIGN_ID);
+        Assertions.assertEquals(expectedCampaign, retrievedCampaign);
     }
 
     @Test
@@ -39,6 +39,6 @@ public class CampaignRepositoryTest {
     public void withExistingDataInJson_getAll_campaignsFound() {
         List<Campaign> campaigns = campaignRepository.getAll();
 
-        Assertions.assertTrue(!campaigns.isEmpty());
+        Assertions.assertTrue(campaigns.size() > 0);
     }
 }

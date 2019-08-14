@@ -23,9 +23,9 @@ public class AdGroupRepositoryTest {
 
     @Test
     public void withExistingAdGroup_findById_adGroupFound() {
-        AdGroup adGroup = adGroupRepository.findById(EXISTING_ADGROUP_ID);
-
-        Assertions.assertNotNull(adGroup);
+        AdGroup retrievedAdGroup = adGroupRepository.findById(EXISTING_ADGROUP_ID);
+        AdGroup expectedAdGroup = new AdGroup(EXISTING_ADGROUP_ID, 0, 54, 23, 28.17f);
+        Assertions.assertEquals(expectedAdGroup, retrievedAdGroup);
     }
 
     @Test
@@ -39,6 +39,6 @@ public class AdGroupRepositoryTest {
     public void withExistingDataInJson_getAll_adGroupsFound() {
         List<AdGroup> adGroups = adGroupRepository.getAll();
 
-        Assertions.assertTrue(!adGroups.isEmpty());
+        Assertions.assertTrue(adGroups.size() > 0);
     }
 }

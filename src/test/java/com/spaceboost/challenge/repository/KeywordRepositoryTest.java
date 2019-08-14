@@ -24,9 +24,10 @@ public class KeywordRepositoryTest {
 
     @Test
     public void withExistingKeyword_findById_keywordFound() {
-        Keyword keyword = keywordRepository.findById(EXISTING_KEYWORD_ID);
+        Keyword retrievedKeyword = keywordRepository.findById(EXISTING_KEYWORD_ID);
+        Keyword expectedKeyword = new Keyword(EXISTING_KEYWORD_ID, 2, 11, 3, 1, 2.14f);
 
-        Assertions.assertNotNull(keyword);
+        Assertions.assertEquals(expectedKeyword, retrievedKeyword);
     }
 
     @Test
@@ -40,7 +41,7 @@ public class KeywordRepositoryTest {
     public void withExistingDataInJson_getAll_keywordsFound() {
         List<Keyword> keywords = keywordRepository.getAll();
 
-        Assertions.assertTrue(!keywords.isEmpty());
+        Assertions.assertTrue(keywords.size() > 0);
     }
 
     @Test
