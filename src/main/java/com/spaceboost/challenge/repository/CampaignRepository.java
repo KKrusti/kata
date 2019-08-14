@@ -2,7 +2,6 @@ package com.spaceboost.challenge.repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.spaceboost.challenge.exception.CampaignNotFoundException;
 import com.spaceboost.challenge.model.Campaign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
@@ -36,12 +35,7 @@ public class CampaignRepository implements ChallengeRepository<Campaign> {
 
     @Override
     public Campaign findById(int id) {
-        Campaign campaign = storedCampaign.get(id);
-        if (campaign != null) {
-            return campaign;
-        } else {
-            throw new CampaignNotFoundException(id);
-        }
+        return storedCampaign.get(id);
     }
 
     @Override

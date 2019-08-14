@@ -1,6 +1,5 @@
 package com.spaceboost.challenge.repository;
 
-import com.spaceboost.challenge.exception.CampaignNotFoundException;
 import com.spaceboost.challenge.model.Campaign;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -29,10 +28,8 @@ public class CampaignRepositoryTest {
     }
 
     @Test
-    public void withNonExistingCampaign_findById_exceptionThrown() {
-        Assertions.assertThrows(CampaignNotFoundException.class, () -> {
-            campaignRepository.findById(NON_EXISTING_CAMPAIGN_ID);
-        });
+    public void withNonExistingCampaign_findById_campaignNotFound() {
+        Assertions.assertNull(campaignRepository.findById(NON_EXISTING_CAMPAIGN_ID));
     }
 
     @Test

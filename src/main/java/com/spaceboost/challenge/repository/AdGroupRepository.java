@@ -2,7 +2,6 @@ package com.spaceboost.challenge.repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.spaceboost.challenge.exception.AdGroupNotFoundException;
 import com.spaceboost.challenge.model.AdGroup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
@@ -36,12 +35,7 @@ public class AdGroupRepository implements ChallengeRepository<AdGroup> {
 
     @Override
     public AdGroup findById(int id) {
-        AdGroup adGroup = storedAdGroup.get(id);
-        if (adGroup != null) {
-            return adGroup;
-        } else {
-            throw new AdGroupNotFoundException(id);
-        }
+        return storedAdGroup.get(id);
     }
 
     @Override

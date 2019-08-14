@@ -1,6 +1,5 @@
 package com.spaceboost.challenge.repository;
 
-import com.spaceboost.challenge.exception.KeywordNotFoundException;
 import com.spaceboost.challenge.model.Keyword;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -15,27 +14,11 @@ import java.util.List;
 @SpringBootTest(classes = KeywordRepository.class)
 public class KeywordRepositoryTest {
 
-    @Autowired
-    private KeywordRepository keywordRepository;
-
     private static final int EXISTING_KEYWORD_ID = 3;
     private static final int NON_EXISTING_KEYWORD_ID = 99999;
-    private static final int MOST_CLICKED_ID = 27;
 
-    @Test
-    public void withExistingKeyword_findById_keywordFound() {
-        Keyword retrievedKeyword = keywordRepository.findById(EXISTING_KEYWORD_ID);
-        Keyword expectedKeyword = new Keyword(EXISTING_KEYWORD_ID, 2, 11, 3, 1, 2.14f);
-
-        Assertions.assertEquals(expectedKeyword, retrievedKeyword);
-    }
-
-    @Test
-    public void withNonExistingKeyword_findById_exceptionThrown() {
-        Assertions.assertThrows(KeywordNotFoundException.class, () -> {
-            keywordRepository.findById(NON_EXISTING_KEYWORD_ID);
-        });
-    }
+    @Autowired
+    private KeywordRepository keywordRepository;
 
     @Test
     public void withExistingDataInJson_getAll_keywordsFound() {
@@ -45,9 +28,18 @@ public class KeywordRepositoryTest {
     }
 
     @Test
-    public void withExistingDataInJson_getMostClick_keywordReturned() {
-        Keyword keyword = keywordRepository.getMostClicked();
+    public void withExistingDataInJSon_findById_keywordFound() {
+        Keyword retrievedKeyword = keywordRepository.findById(EXISTING_KEYWORD_ID);
+        Keyword expectedKeyword = new Keyword(EXISTING_KEYWORD_ID, 2, 11, 3, 1, 2.14f);
 
-        Assertions.assertEquals(MOST_CLICKED_ID, keyword.getId());
+        Assertions.assertEquals(expectedKeyword, retrievedKeyword);
     }
+
+    @Test
+    public void withExistingDataInJSon_findById_keywordNotFound() {
+        Keyword retrievedKeyword = keywordRepository.findById(NON_EXISTING_KEYWORD_ID);
+
+        Assertions.assertNull(retrievedKeyword);
+    }
+
 }

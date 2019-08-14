@@ -1,13 +1,12 @@
 package com.spaceboost.challenge.service;
 
-import com.spaceboost.challenge.model.Campaign;
+import com.spaceboost.challenge.exception.KeywordNotFoundException;
 import com.spaceboost.challenge.model.Keyword;
-import com.spaceboost.challenge.repository.CampaignRepository;
 import com.spaceboost.challenge.repository.KeywordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Comparator;
 
 @Service
 public class KeywordService {
@@ -15,17 +14,25 @@ public class KeywordService {
     @Autowired
     private KeywordRepository keywordRepository;
 
-    public List<Keyword> getAllKeywords(){
-        return keywordRepository.getAll();
+    @Autowired
+    public KeywordService(KeywordRepository keywordRepository) {
+        this.keywordRepository = keywordRepository;
     }
-//
-//    public CampaignService(CampaignRepository campaignRepository){
-//        this.campaignRepository = campaignRepository;
-//    }
 
-//    public Campaign getCampaign(int id){
-//        return new Campaign(id);
-//    }
+    public Keyword getKeyword(int keywordId) {
+        Keyword keyword = keywordRepository.findById(keywordId);
+        if (keyword != null) {
+            return keyword;
+        } else {
+            throw new KeywordNotFoundException(keywordId);
+        }
+    }
 
+    public Keyword getMostClicked() {
+        return keywordRepository.getAll().stream().max(Comparator.comparing(Keyword::getClicks)).orElseThrow(() -> new IllegalArgumentException());
+    }
 
+    public Keyword getMostConversions() {
+        return keywordRepository.getAll().stream().max(Comparator.comparing(Keyword::getConversions)).orElseThrow(() -> new IllegalArgumentException());
+    }
 }
