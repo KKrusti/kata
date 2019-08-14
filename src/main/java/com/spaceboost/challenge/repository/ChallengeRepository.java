@@ -11,11 +11,11 @@ public interface ChallengeRepository<T> {
 
     T findById(int id);
 
-    T create(T object);
+    void add(T object);
 
     List<T> getAll();
 
     @PostConstruct
-    void init() throws IOException;
+    void loadObjectsFromJson() throws IOException;
 
 }

@@ -38,4 +38,14 @@ public class AdGroupRepositoryTest {
 
         Assertions.assertTrue(adGroups.size() > 0);
     }
+
+    @Test
+    public void createAdGroup() {
+        int previousSize = adGroupRepository.getAll().size();
+        AdGroup adGroup = new AdGroup(99, 99, 5, 1, 5.55f);
+        adGroupRepository.add(adGroup);
+        int postSize = adGroupRepository.getAll().size();
+        Assertions.assertTrue(previousSize < postSize);
+    }
+
 }

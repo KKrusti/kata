@@ -38,4 +38,13 @@ public class CampaignRepositoryTest {
 
         Assertions.assertTrue(campaigns.size() > 0);
     }
+
+    @Test
+    public void addCampaign() {
+        int previousSize = campaignRepository.getAll().size();
+        Campaign campaign = new Campaign(99);
+        campaignRepository.add(campaign);
+        int postSize = campaignRepository.getAll().size();
+        Assertions.assertTrue(previousSize < postSize);
+    }
 }

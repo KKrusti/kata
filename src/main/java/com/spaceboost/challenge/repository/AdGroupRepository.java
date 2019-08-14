@@ -23,14 +23,15 @@ public class AdGroupRepository implements ChallengeRepository<AdGroup> {
     private ResourceLoader resourceLoader;
     private Map<Integer, AdGroup> storedAdGroup = new ConcurrentHashMap<>();
 
+
     @Override
     @PostConstruct
-    public void init() throws IOException {
+    public void loadObjectsFromJson() throws IOException {
         final ObjectMapper jsonMapper = new ObjectMapper();
         final File repositoryJsonFile = resourceLoader.getResource(JSON_PATH).getFile();
-        List<AdGroup> loadedAdGroupList = jsonMapper.readValue(repositoryJsonFile, new TypeReference<List<AdGroup>>() {
+        List<AdGroup> loadedAdGroup = jsonMapper.readValue(repositoryJsonFile, new TypeReference<List<AdGroup>>() {
         });
-        loadedAdGroupList.forEach(adgroup -> storedAdGroup.put(adgroup.getId(), adgroup));
+        loadedAdGroup.forEach(adGroup -> storedAdGroup.put(adGroup.getId(), adGroup));
     }
 
     @Override
@@ -39,8 +40,8 @@ public class AdGroupRepository implements ChallengeRepository<AdGroup> {
     }
 
     @Override
-    public AdGroup create(AdGroup object) {
-        return null;
+    public void add(AdGroup adGroup) {
+        storedAdGroup.put(adGroup.getId(), adGroup);
     }
 
     @Override

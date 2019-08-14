@@ -25,7 +25,7 @@ public class CampaignRepository implements ChallengeRepository<Campaign> {
 
     @PostConstruct
     @Override
-    public void init() throws IOException {
+    public void loadObjectsFromJson() throws IOException {
         final ObjectMapper jsonMapper = new ObjectMapper();
         final File repositoryJsonFile = resourceLoader.getResource(JSON_PATH).getFile();
         List<Campaign> loadedCampaignList = jsonMapper.readValue(repositoryJsonFile, new TypeReference<List<Campaign>>() {
@@ -39,8 +39,8 @@ public class CampaignRepository implements ChallengeRepository<Campaign> {
     }
 
     @Override
-    public Campaign create(Campaign object) {
-        return null;
+    public void add(Campaign campaign) {
+        storedCampaign.put(campaign.getId(), campaign);
     }
 
     @Override

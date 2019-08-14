@@ -25,7 +25,7 @@ public class KeywordRepository implements ChallengeRepository<Keyword> {
 
     @Override
     @PostConstruct
-    public void init() throws IOException {
+    public void loadObjectsFromJson() throws IOException {
         final ObjectMapper jsonMapper = new ObjectMapper();
         final File repositoryJsonFile = resourceLoader.getResource(JSON_PATH).getFile();
         List<Keyword> loadedKeywordList = jsonMapper.readValue(repositoryJsonFile, new TypeReference<List<Keyword>>() {
@@ -39,8 +39,8 @@ public class KeywordRepository implements ChallengeRepository<Keyword> {
     }
 
     @Override
-    public Keyword create(Keyword object) {
-        return null;
+    public void add(Keyword keyword) {
+        storedKeyword.put(keyword.getId(), keyword);
     }
 
     @Override

@@ -42,4 +42,13 @@ public class KeywordRepositoryTest {
         Assertions.assertNull(retrievedKeyword);
     }
 
+    @Test
+    public void addKeyword() {
+        int previousSize = keywordRepository.getAll().size();
+        Keyword keyword = new Keyword(99, 99, 99, 99, 50, 50.00f);
+        keywordRepository.add(keyword);
+        int postSize = keywordRepository.getAll().size();
+        Assertions.assertTrue(previousSize < postSize);
+    }
+
 }
