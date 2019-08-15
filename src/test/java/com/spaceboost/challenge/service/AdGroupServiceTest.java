@@ -10,12 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {AdGroupService.class, Application.class})
 public class AdGroupServiceTest {
 
     private static final int EXISTING_ADGROUP_ID = 5;
     private static final int NON_EXISTING_ADGROUP_ID = 99999;
+    private static final int CAMPAIGN_ID = 1;
 
 
     @Autowired
@@ -33,6 +37,18 @@ public class AdGroupServiceTest {
         Assertions.assertThrows(AdGroupNotFoundException.class, () -> {
             adGroupService.getAdgroup(NON_EXISTING_ADGROUP_ID);
         });
+    }
+
+    @Test
+    public void withExistingCampaign_getAdGroupsForCampaign_getList() {
+        List<AdGroup> adGroups = adGroupService.getAdGroupsForCampaign(1);
+
+        List<AdGroup> expectedAdGroups = new ArrayList<>();
+        expectedAdGroups.add(new AdGroup(8, 1, 5, 0, 3.32f));
+        expectedAdGroups.add(new AdGroup(12, 1, 87, 13, 101.73f));
+        expectedAdGroups.add(new AdGroup(13, 1, 55, 18, 99.47f));
+
+        Assertions.assertEquals(expectedAdGroups, adGroups);
     }
 
 }

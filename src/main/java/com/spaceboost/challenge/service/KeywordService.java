@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class KeywordService {
@@ -34,5 +36,10 @@ public class KeywordService {
 
     public Keyword getMostConversions() {
         return keywordRepository.getAll().stream().max(Comparator.comparing(Keyword::getConversions)).orElseThrow(() -> new IllegalArgumentException());
+    }
+
+    public List<Keyword> getKeywordsForCampaignId(int campaignId) {
+        List<Keyword> keywords = keywordRepository.getAll().stream().filter(x -> x.getCampaignId() == campaignId).collect(Collectors.toList());
+        return keywords;
     }
 }

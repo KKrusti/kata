@@ -6,6 +6,8 @@ import com.spaceboost.challenge.repository.CampaignRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CampaignService {
 
@@ -25,5 +27,8 @@ public class CampaignService {
         }
     }
 
+    public List<Campaign> getAll() {
+        return campaignRepository.getAll();
+    }
 
 }

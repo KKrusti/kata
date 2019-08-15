@@ -8,11 +8,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 @SpringBootTest(classes = {CampaignService.class, Application.class})
 public class CampaignServiceTest {
 
     private static final int EXISTING_CAMPAIGN_ID = 1;
     private static final int NON_EXISTING_CAMPAIGN_ID = 99999;
+    private static final int INITIAL_CAMPAIGN_NUMBER = 5;
 
     @Autowired
     private CampaignService campaignService;
@@ -29,6 +32,13 @@ public class CampaignServiceTest {
         Assertions.assertThrows(CampaignNotFoundException.class, () -> {
             campaignService.getCampaign(NON_EXISTING_CAMPAIGN_ID);
         });
+    }
+
+    @Test
+    public void getAll() {
+        List<Campaign> campaigns = campaignService.getAll();
+
+        Assertions.assertEquals(INITIAL_CAMPAIGN_NUMBER, campaigns.size());
     }
 
 }

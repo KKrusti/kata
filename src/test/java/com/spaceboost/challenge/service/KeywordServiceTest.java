@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.List;
+
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {KeywordService.class, Application.class})
 public class KeywordServiceTest {
@@ -50,6 +52,19 @@ public class KeywordServiceTest {
         Keyword keyword = keywordService.getMostConversions();
 
         Assertions.assertEquals(MOST_CONVERTED_ID, keyword.getId());
+    }
+
+    @Test
+    public void withExistingCampaign_getKeywordsForCampaign_getList() {
+        List<Keyword> keywords = keywordService.getKeywordsForCampaignId(1);
+
+//        List<Keyword> expectedAdGroups = new ArrayList<>();
+//        expectedAdGroups.add(new Keyword(8, 1, 5, 0, 3.32f));
+//        expectedAdGroups.add(new Keyword(12, 1, 87, 13, 101.73f));
+//        expectedAdGroups.add(new Keyword(13, 1, 55, 18, 99.47f));
+
+//        Assertions.assertEquals(expectedAdGroups, keywords);
+        Assertions.assertTrue(keywords.size() > 0);
     }
 
 }

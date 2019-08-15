@@ -6,6 +6,9 @@ import com.spaceboost.challenge.repository.AdGroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class AdGroupService {
 
@@ -23,6 +26,11 @@ public class AdGroupService {
         } else {
             throw new AdGroupNotFoundException(adGroupId);
         }
+    }
+
+    public List<AdGroup> getAdGroupsForCampaign(long campaignId) {
+        List<AdGroup> adGroups = adGroupRepository.getAll().stream().filter(x -> x.getCampaignId() == campaignId).collect(Collectors.toList());
+        return adGroups;
     }
 
 

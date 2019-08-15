@@ -50,5 +50,4 @@ public class KeywordRepositoryTest {
         int postSize = keywordRepository.getAll().size();
         Assertions.assertTrue(previousSize < postSize);
     }
-
 }
