@@ -39,8 +39,9 @@ public class KeywordRepository implements ChallengeRepository<Keyword> {
     }
 
     @Override
-    public void add(Keyword keyword) {
+    public Keyword add(Keyword keyword) {
         storedKeyword.put(keyword.getId(), keyword);
+        return keyword;
     }
 
     @Override

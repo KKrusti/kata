@@ -11,7 +11,7 @@ public interface ChallengeRepository<T> {
 
     T findById(int id);
 
-    void add(T object);
+    T add(T object);
 
     List<T> getAll();
 

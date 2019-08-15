@@ -39,8 +39,9 @@ public class CampaignRepository implements ChallengeRepository<Campaign> {
     }
 
     @Override
-    public void add(Campaign campaign) {
+    public Campaign add(Campaign campaign) {
         storedCampaign.put(campaign.getId(), campaign);
+        return campaign;
     }
 
     @Override

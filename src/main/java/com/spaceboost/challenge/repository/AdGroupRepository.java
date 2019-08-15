@@ -40,8 +40,9 @@ public class AdGroupRepository implements ChallengeRepository<AdGroup> {
     }
 
     @Override
-    public void add(AdGroup adGroup) {
+    public AdGroup add(AdGroup adGroup) {
         storedAdGroup.put(adGroup.getId(), adGroup);
+        return adGroup;
     }
 
     @Override
