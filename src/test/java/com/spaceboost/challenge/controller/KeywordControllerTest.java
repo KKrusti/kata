@@ -34,7 +34,7 @@ public class KeywordControllerTest {
     private MockMvc mvc;
 
     @Test
-    public void withWrightCombination_shouldReturnKeyword() throws Exception {
+    public void withWrightCombination_getKeyword_shouldReturnKeyword() throws Exception {
         Keyword keyword = new Keyword(KEYWORD_ID, CAMPAIGN_ID, ADGROUP_ID, 1, 0, 0.54f);
 
         when(mockKeywordService.getKeywordWithCampaignAndAdGroupId(1, 12, 0)).thenReturn(keyword);
@@ -51,7 +51,7 @@ public class KeywordControllerTest {
     }
 
     @Test
-    public void withWrongCombination_shouldReturnError() throws Exception {
+    public void withWrongCombination_getKeyword_shouldReturnError() throws Exception {
         ApiError apiError = new ApiError("CampaignId = 1 , adGroupId = 1 , KeywordId = 1");
         String errorMessage = ExceptionHandlerAdvice.ERROR_MESSAGE + apiError.getMessage();
         when(mockKeywordService.getKeywordWithCampaignAndAdGroupId(1, 1, 1)).thenThrow(new WrongIdentifiersException(apiError.getMessage()));
@@ -60,5 +60,22 @@ public class KeywordControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.message", is(errorMessage)));
+    }
+
+    @Test
+    public void withOriginalData_getMostClicked_returnKeyword() throws Exception {
+        //given
+        Keyword mostClickedKeyword = new Keyword(27, 0, 3, 11, 5, 9.11f);
+        when(mockKeywordService.getMostClicked()).thenReturn(mostClickedKeyword);
+
+        mvc.perform(get("/keywords/mostClicked"))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(jsonPath("$.id", is(27)))
+                .andExpect(jsonPath("$.campaignId", is(0)))
+                .andExpect(jsonPath("$.adGroupId", is(3)))
+                .andExpect(jsonPath("$.clicks", is(11)))
+                .andExpect(jsonPath("$.conversions", is(5)))
+                .andExpect(jsonPath("$.cost", is(9.11)));
     }
 }

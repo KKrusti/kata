@@ -25,4 +25,10 @@ public class KeywordController {
         return ResponseEntity.ok(keyword);
     }
 
+    @GetMapping("keywords/mostClicked")
+    public ResponseEntity<Keyword> getMostClicked() {
+        Keyword keyword = keywordService.getMostClicked();
+        return ResponseEntity.ok(keyword);
+    }
+
 }
