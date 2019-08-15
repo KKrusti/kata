@@ -1,6 +1,7 @@
 package com.spaceboost.challenge.service;
 
 import com.spaceboost.challenge.exception.KeywordNotFoundException;
+import com.spaceboost.challenge.exception.WrongIdentifiersException;
 import com.spaceboost.challenge.model.Keyword;
 import com.spaceboost.challenge.repository.KeywordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,4 +43,14 @@ public class KeywordService {
         List<Keyword> keywords = keywordRepository.getAll().stream().filter(x -> x.getCampaignId() == campaignId).collect(Collectors.toList());
         return keywords;
     }
+
+    public Keyword getKeywordWithCampaignAndAdGroupId(int campaignId, int adGroupId, int keywordId) {
+        Keyword keyword = getKeyword(keywordId);
+        if (keyword.getCampaignId() == campaignId && keyword.getAdGroupId() == adGroupId) {
+            return keyword;
+        } else {
+            throw new WrongIdentifiersException("CampaignId = " + campaignId + " , adGroupId = " + adGroupId + " , KeywordId = " + keywordId);
+        }
+    }
+
 }

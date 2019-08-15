@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
-//@RequestMapping(value = "/adGroups")
 public class AdGroupController {
 
     @Autowired
@@ -25,18 +24,4 @@ public class AdGroupController {
         AdGroup adGroup = adGroupService.getAdGroupWithCampaign(campaignId, adGroupId);
         return ResponseEntity.ok(adGroup);
     }
-
-
-//     @Autowired
-//    private CampaignService campaignService;
-//
-//    @Autowired
-//    public CampaignController(CampaignService campaignService) {
-//        this.campaignService = campaignService;
-//    }
-//
-//    @GetMapping("campaigns/{id}")
-//    public ResponseEntity<Campaign> getCampaign(@PathVariable("id") int id) {
-//        return ResponseEntity.ok(campaignService.getCampaign(id));
-//    }
 }
