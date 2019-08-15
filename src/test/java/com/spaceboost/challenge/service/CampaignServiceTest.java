@@ -41,4 +41,15 @@ public class CampaignServiceTest {
         Assertions.assertEquals(INITIAL_CAMPAIGN_NUMBER, campaigns.size());
     }
 
+    @Test
+    public void createCampaign() {
+        Campaign campaign = new Campaign(999);
+        int initialSize = campaignService.getAll().size();
+        Campaign createdCampaign = campaignService.create(campaign);
+        int finalSize = campaignService.getAll().size();
+
+        Assertions.assertEquals(campaign, createdCampaign);
+        Assertions.assertTrue(initialSize < finalSize);
+    }
+
 }

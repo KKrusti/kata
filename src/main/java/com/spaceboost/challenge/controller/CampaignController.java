@@ -7,6 +7,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
+
+import javax.validation.Valid;
+import java.net.URI;
 
 @Controller
 public class CampaignController {
@@ -22,6 +28,13 @@ public class CampaignController {
     @GetMapping("campaigns/{id}")
     public ResponseEntity<Campaign> getCampaign(@PathVariable("id") int id) {
         return ResponseEntity.ok(campaignService.getCampaign(id));
+    }
+
+    @PostMapping("campaigns/campaign")
+    public ResponseEntity<Campaign> createCampaign(@RequestBody @Valid Campaign campaign) {
+        Campaign createdCampaign = campaignService.create(campaign);
+        URI selfLink = MvcUriComponentsBuilder.fromController(getClass()).path("campaigns/{id}").buildAndExpand(createdCampaign.getId()).toUri();
+        return ResponseEntity.created(selfLink).body(createdCampaign);
     }
 
 }

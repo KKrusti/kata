@@ -31,4 +31,8 @@ public class CampaignService {
         return campaignRepository.getAll();
     }
 
+    public Campaign create(Campaign campaign) {
+        return campaignRepository.add(campaign);
+    }
+
 }
