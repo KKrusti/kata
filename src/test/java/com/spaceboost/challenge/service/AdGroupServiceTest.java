@@ -2,6 +2,7 @@ package com.spaceboost.challenge.service;
 
 import com.spaceboost.challenge.Application;
 import com.spaceboost.challenge.exception.AdGroupNotFoundException;
+import com.spaceboost.challenge.exception.WrongIdentifiersException;
 import com.spaceboost.challenge.model.AdGroup;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -49,6 +50,12 @@ public class AdGroupServiceTest {
         expectedAdGroups.add(new AdGroup(13, 1, 55, 18, 99.47f));
 
         Assertions.assertEquals(expectedAdGroups, adGroups);
+    }
+
+    @Test
+    public void withWrongIdentifierCombination_getAdGroupWithCampaign_throwException() {
+        Assertions.assertThrows(WrongIdentifiersException.class, () ->
+                adGroupService.getAdGroupWithCampaign(1, 1));
     }
 
 }
