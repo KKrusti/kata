@@ -40,8 +40,7 @@ public class KeywordService {
     }
 
     public List<Keyword> getKeywordsForCampaignId(int campaignId) {
-        List<Keyword> keywords = keywordRepository.getAll().stream().filter(x -> x.getCampaignId() == campaignId).collect(Collectors.toList());
-        return keywords;
+        return keywordRepository.getAll().stream().filter(x -> x.getCampaignId() == campaignId).collect(Collectors.toList());
     }
 
     public Keyword getKeywordWithCampaignAndAdGroupId(int campaignId, int adGroupId, int keywordId) {

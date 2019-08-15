@@ -30,8 +30,7 @@ public class AdGroupService {
     }
 
     public List<AdGroup> getAdGroupsForCampaign(int campaignId) {
-        List<AdGroup> adGroups = adGroupRepository.getAll().stream().filter(x -> x.getCampaignId() == campaignId).collect(Collectors.toList());
-        return adGroups;
+        return adGroupRepository.getAll().stream().filter(x -> x.getCampaignId() == campaignId).collect(Collectors.toList());
     }
 
     public AdGroup getAdGroupWithCampaign(int campaignId, int adGroupId) throws WrongIdentifiersException {

@@ -20,7 +20,6 @@ public class AdGroupServiceTest {
 
     private static final int EXISTING_ADGROUP_ID = 5;
     private static final int NON_EXISTING_ADGROUP_ID = 99999;
-    private static final int CAMPAIGN_ID = 1;
 
 
     @Autowired

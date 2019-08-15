@@ -2,6 +2,7 @@ package com.spaceboost.challenge.service;
 
 import com.spaceboost.challenge.Application;
 import com.spaceboost.challenge.exception.KeywordNotFoundException;
+import com.spaceboost.challenge.exception.WrongIdentifiersException;
 import com.spaceboost.challenge.model.Keyword;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -70,4 +71,18 @@ public class KeywordServiceTest {
         Assertions.assertTrue(keywords.size() > 0);
     }
 
+    @Test
+    public void withWrongIdentifierCombination_getKeywordWithCampaignAndAdGroupId_throwException() {
+        Assertions.assertThrows(WrongIdentifiersException.class, () ->
+                keywordService.getKeywordWithCampaignAndAdGroupId(1, 1, 1));
+    }
+
+    @Test
+    public void withWrightIdentifierCombination_getKeywordWithCampaignAndAdGroupId_getKeyword() {
+        Keyword expectedKeyword = new Keyword(0, 1, 12, 1, 0, 0.54f);
+
+        Keyword keyword = keywordService.getKeywordWithCampaignAndAdGroupId(1, 12, 0);
+
+        Assertions.assertEquals(expectedKeyword, keyword);
+    }
 }
