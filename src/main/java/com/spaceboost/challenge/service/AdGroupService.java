@@ -1,6 +1,7 @@
 package com.spaceboost.challenge.service;
 
 import com.spaceboost.challenge.exception.AdGroupNotFoundException;
+import com.spaceboost.challenge.exception.IdExistsException;
 import com.spaceboost.challenge.exception.WrongIdentifiersException;
 import com.spaceboost.challenge.model.AdGroup;
 import com.spaceboost.challenge.repository.AdGroupRepository;
@@ -42,7 +43,7 @@ public class AdGroupService {
         }
     }
 
-    public AdGroup create(AdGroup adGroup) {
+    public AdGroup create(AdGroup adGroup) throws IdExistsException {
         return adGroupRepository.add(adGroup);
     }
 

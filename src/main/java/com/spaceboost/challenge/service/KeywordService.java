@@ -1,5 +1,6 @@
 package com.spaceboost.challenge.service;
 
+import com.spaceboost.challenge.exception.IdExistsException;
 import com.spaceboost.challenge.exception.KeywordNotFoundException;
 import com.spaceboost.challenge.exception.WrongIdentifiersException;
 import com.spaceboost.challenge.model.Keyword;
@@ -50,6 +51,10 @@ public class KeywordService {
         } else {
             throw new WrongIdentifiersException("CampaignId = " + campaignId + " , adGroupId = " + adGroupId + " , KeywordId = " + keywordId);
         }
+    }
+
+    public Keyword create(Keyword keyword) throws IdExistsException {
+        return keywordRepository.add(keyword);
     }
 
 }

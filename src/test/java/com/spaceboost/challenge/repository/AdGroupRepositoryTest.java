@@ -1,5 +1,6 @@
 package com.spaceboost.challenge.repository;
 
+import com.spaceboost.challenge.exception.IdExistsException;
 import com.spaceboost.challenge.model.AdGroup;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -40,12 +41,18 @@ public class AdGroupRepositoryTest {
     }
 
     @Test
-    public void createAdGroup() {
+    public void withNewAdgroup_add_adGroupCreated() {
         int previousSize = adGroupRepository.getAll().size();
         AdGroup adGroup = new AdGroup(99, 99, 5, 1, 5.55f);
         adGroupRepository.add(adGroup);
         int postSize = adGroupRepository.getAll().size();
         Assertions.assertTrue(previousSize < postSize);
+    }
+
+    @Test
+    public void withRepeatedId_cadd_errorThrown() {
+        AdGroup existingAdGroup = new AdGroup(1, 1, 1, 1, 1f);
+        Assertions.assertThrows(IdExistsException.class, () -> adGroupRepository.add(existingAdGroup));
     }
 
 }

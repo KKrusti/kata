@@ -1,5 +1,6 @@
 package com.spaceboost.challenge.repository;
 
+import com.spaceboost.challenge.exception.IdExistsException;
 import com.spaceboost.challenge.model.Campaign;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -40,11 +41,17 @@ public class CampaignRepositoryTest {
     }
 
     @Test
-    public void addCampaign() {
+    public void withNewCampaign_add_campaignCreated() {
         int previousSize = campaignRepository.getAll().size();
         Campaign campaign = new Campaign(99);
         campaignRepository.add(campaign);
         int postSize = campaignRepository.getAll().size();
         Assertions.assertTrue(previousSize < postSize);
+    }
+
+    @Test
+    public void withExistingCampaignId_add_exceptionThrown() {
+        Campaign campaign = new Campaign(0);
+        Assertions.assertThrows(IdExistsException.class, () -> campaignRepository.add(campaign));
     }
 }

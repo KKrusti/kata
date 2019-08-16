@@ -1,6 +1,7 @@
 package com.spaceboost.challenge.service;
 
 import com.spaceboost.challenge.exception.CampaignNotFoundException;
+import com.spaceboost.challenge.exception.IdExistsException;
 import com.spaceboost.challenge.model.Campaign;
 import com.spaceboost.challenge.repository.CampaignRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class CampaignService {
         return campaignRepository.getAll();
     }
 
-    public Campaign create(Campaign campaign) {
+    public Campaign create(Campaign campaign) throws IdExistsException {
         return campaignRepository.add(campaign);
     }
 

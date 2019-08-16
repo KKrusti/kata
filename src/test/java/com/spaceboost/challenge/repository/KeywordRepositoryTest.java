@@ -43,7 +43,7 @@ public class KeywordRepositoryTest {
     }
 
     @Test
-    public void addKeyword() {
+    public void withNewKeyword_add_keywordCreated() {
         int previousSize = keywordRepository.getAll().size();
         Keyword keyword = new Keyword(99, 99, 99, 99, 50, 50.00f);
         keywordRepository.add(keyword);

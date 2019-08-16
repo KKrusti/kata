@@ -2,7 +2,6 @@ package com.spaceboost.challenge.service;
 
 import com.spaceboost.challenge.Application;
 import com.spaceboost.challenge.exception.CampaignNotFoundException;
-import com.spaceboost.challenge.exception.IdExistsException;
 import com.spaceboost.challenge.model.Campaign;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -53,10 +52,5 @@ public class CampaignServiceTest {
         Assertions.assertTrue(initialSize < finalSize);
     }
 
-    @Test
-    public void withExistingCampaignId_createCampaign_exceptionThrown() {
-        Campaign campaign = new Campaign(0);
-        Assertions.assertThrows(IdExistsException.class, () -> campaignService.create(campaign));
-    }
 
 }

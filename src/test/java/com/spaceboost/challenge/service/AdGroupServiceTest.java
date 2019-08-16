@@ -2,7 +2,6 @@ package com.spaceboost.challenge.service;
 
 import com.spaceboost.challenge.Application;
 import com.spaceboost.challenge.exception.AdGroupNotFoundException;
-import com.spaceboost.challenge.exception.IdExistsException;
 import com.spaceboost.challenge.exception.WrongIdentifiersException;
 import com.spaceboost.challenge.model.AdGroup;
 import org.junit.jupiter.api.Assertions;
@@ -64,13 +63,6 @@ public class AdGroupServiceTest {
         AdGroup createdAdgroup = adGroupService.create(adGroup);
 
         Assertions.assertEquals(adGroup, createdAdgroup);
-    }
-
-    @Test
-    public void withExistingAdGroup_create_throwError() {
-        AdGroup adGroup = new AdGroup(1, 50, 1, 1, 1f);
-        Assertions.assertThrows(IdExistsException.class, () ->
-                adGroupService.create(adGroup));
     }
 
 }
