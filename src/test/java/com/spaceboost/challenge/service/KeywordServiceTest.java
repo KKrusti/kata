@@ -1,9 +1,12 @@
 package com.spaceboost.challenge.service;
 
 import com.spaceboost.challenge.Application;
+import com.spaceboost.challenge.exception.AdGroupNotFoundException;
+import com.spaceboost.challenge.exception.IdExistsException;
 import com.spaceboost.challenge.exception.KeywordNotFoundException;
 import com.spaceboost.challenge.exception.WrongIdentifiersException;
 import com.spaceboost.challenge.model.Keyword;
+import com.spaceboost.challenge.repository.KeywordRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,6 +29,16 @@ public class KeywordServiceTest {
 
     @Autowired
     private KeywordService keywordService;
+
+    @Autowired
+    private KeywordRepository repository;
+
+    @Test
+    public void withInitialStatus_getAll() {
+        List<Keyword> keywords = keywordService.getAll();
+
+        Assertions.assertEquals(repository.getAll().size(), keywords.size());
+    }
 
     @Test
     public void withExistingKeyword_findById_keywordFound() {
@@ -88,18 +101,40 @@ public class KeywordServiceTest {
     }
 
     @Test
-    public void getAll() {
-        List<Keyword> keywords = keywordService.getAll();
-
-        Assertions.assertEquals(INITIAL_KEYWORD_NUMBER, keywords.size());
-    }
-
-    @Test
-    public void withNewKeyword_add_keywordCreated() {
+    public void withNewKeyword_create_keywordCreated() {
         int previousSize = keywordService.getAll().size();
-        Keyword keyword = new Keyword(99, 99, 99, 2, 50, 50.00f);
+        Keyword keyword = new Keyword(99, 2, 6, 2, 0, 50.00f);
         keywordService.create(keyword);
         int postSize = keywordService.getAll().size();
         Assertions.assertTrue(previousSize < postSize);
     }
+
+    @Test
+    public void withDuplicatedKeyword_create_errorThrown() {
+        Keyword keyword = new Keyword(0, 0, 0, 0, 0, 0f);
+        Assertions.assertThrows(IdExistsException.class, () -> keywordService.create(keyword));
+    }
+
+    @Test
+    public void withNotExistingAdGroup_create_errorThrown() {
+        Keyword keyword = new Keyword(666, 2, 999, 2, 50, 50.00f);
+        Assertions.assertThrows(AdGroupNotFoundException.class, () -> keywordService.create(keyword));
+    }
+
+    @Test
+    public void withExistingAdGroupWrongCampaign_create_errorThrown() {
+        Keyword keyword = new Keyword(111, 1, 6, 2, 50, 50.00f);
+        Assertions.assertThrows(WrongIdentifiersException.class, () -> keywordService.create(keyword));
+    }
+
+    @Test
+    public void withExistingAdGroupRightCampaign_create_keywordCreated() {
+        Keyword keyword = new Keyword(123, 2, 6, 0, 0, 0);
+        int previousSize = keywordService.getAll().size();
+        keywordService.create(keyword);
+        int postSize = keywordService.getAll().size();
+
+        Assertions.assertTrue(previousSize < postSize);
+    }
+
 }

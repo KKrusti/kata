@@ -19,6 +19,7 @@ public class ApplicationTests {
     @Test
     public void contextLoads() {
         assertThat(campaignController).isNotNull();
+
     }
 
 }

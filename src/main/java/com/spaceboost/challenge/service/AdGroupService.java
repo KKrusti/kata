@@ -1,6 +1,7 @@
 package com.spaceboost.challenge.service;
 
 import com.spaceboost.challenge.exception.AdGroupNotFoundException;
+import com.spaceboost.challenge.exception.CampaignNotFoundException;
 import com.spaceboost.challenge.exception.IdExistsException;
 import com.spaceboost.challenge.exception.WrongIdentifiersException;
 import com.spaceboost.challenge.model.AdGroup;
@@ -15,6 +16,9 @@ import java.util.stream.Collectors;
 public class AdGroupService {
 
     private AdGroupRepository adGroupRepository;
+
+    @Autowired
+    private CampaignService campaignService;
 
     @Autowired
     public AdGroupService(AdGroupRepository adGroupRepository) {
@@ -47,11 +51,21 @@ public class AdGroupService {
         }
     }
 
-    public AdGroup create(AdGroup adGroup) throws IdExistsException {
-        if (adGroupRepository.findById(adGroup.getId()) == null) {
-            return adGroupRepository.add(adGroup);
-        } else {
-            throw new IdExistsException("AdGroup with id " + adGroup.getId() + " already exists");
+    public AdGroup create(AdGroup adGroup) throws IdExistsException, CampaignNotFoundException {
+        adGroupIsNew(adGroup.getId());
+        campaignExists(adGroup.getCampaignId());
+        return adGroupRepository.add(adGroup);
+    }
+
+    private void campaignExists(int campaignId) throws CampaignNotFoundException {
+        if (campaignService.getCampaign(campaignId) == null) {
+            throw new CampaignNotFoundException(campaignId);
+        }
+    }
+
+    private void adGroupIsNew(int adGroupId) throws IdExistsException {
+        if (adGroupRepository.findById(adGroupId) != null) {
+            throw new IdExistsException("AdGroup with id " + adGroupId + " already exists");
         }
     }
 

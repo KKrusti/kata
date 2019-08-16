@@ -2,6 +2,7 @@ package com.spaceboost.challenge.service;
 
 import com.spaceboost.challenge.Application;
 import com.spaceboost.challenge.exception.AdGroupNotFoundException;
+import com.spaceboost.challenge.exception.CampaignNotFoundException;
 import com.spaceboost.challenge.exception.IdExistsException;
 import com.spaceboost.challenge.exception.WrongIdentifiersException;
 import com.spaceboost.challenge.model.AdGroup;
@@ -68,7 +69,7 @@ public class AdGroupServiceTest {
 
     @Test
     public void withNewAdGroup_create_adGroupCreated() {
-        AdGroup adGroup = new AdGroup(50, 50, 1, 1, 1f);
+        AdGroup adGroup = new AdGroup(50, 2, 1, 1, 1f);
         int initialSize = adGroupService.getAll().size();
         AdGroup createdAdgroup = adGroupService.create(adGroup);
         int finalSize = adGroupService.getAll().size();
@@ -81,6 +82,12 @@ public class AdGroupServiceTest {
     public void withRepeatedId_cadd_errorThrown() {
         AdGroup existingAdGroup = new AdGroup(1, 1, 1, 1, 1f);
         Assertions.assertThrows(IdExistsException.class, () -> adGroupService.create(existingAdGroup));
+    }
+
+    @Test
+    public void withNonExistingCampaign_create_errorThrown() {
+        AdGroup adGroup = new AdGroup(512, 112, 1, 1, 1f);
+        Assertions.assertThrows(CampaignNotFoundException.class, () -> adGroupService.create(adGroup));
     }
 
 }
