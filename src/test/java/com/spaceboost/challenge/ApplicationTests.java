@@ -1,6 +1,8 @@
 package com.spaceboost.challenge;
 
+import com.spaceboost.challenge.controller.AdGroupController;
 import com.spaceboost.challenge.controller.CampaignController;
+import com.spaceboost.challenge.controller.KeywordController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +18,17 @@ public class ApplicationTests {
     @Autowired
     private CampaignController campaignController;
 
+    @Autowired
+    private AdGroupController adGroupController;
+
+    @Autowired
+    private KeywordController keywordController;
+
     @Test
     public void contextLoads() {
         assertThat(campaignController).isNotNull();
+        assertThat(adGroupController).isNotNull();
+        assertThat(keywordController).isNotNull();
 
     }
 
