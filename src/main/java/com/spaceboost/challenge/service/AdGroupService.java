@@ -58,9 +58,7 @@ public class AdGroupService {
     }
 
     private void campaignExists(int campaignId) throws CampaignNotFoundException {
-        if (campaignService.getCampaign(campaignId) == null) {
-            throw new CampaignNotFoundException(campaignId);
-        }
+        campaignService.getCampaign(campaignId);
     }
 
     private void adGroupIsNew(int adGroupId) throws IdExistsException {

@@ -84,9 +84,7 @@ public class KeywordService {
      * @throws WrongIdentifiersException if there's a mismatch between campaignId of the keyword and the campaignId of the AdGroup
      */
     private void adGroupAndCampaignExist(int campaignId, int adGroupId) throws AdGroupNotFoundException, WrongIdentifiersException {
-        if (adGroupService.getAdGroupWithCampaign(campaignId, adGroupId) == null) {
-            throw new AdGroupNotFoundException(adGroupId);
-        }
+        adGroupService.getAdGroupWithCampaign(campaignId, adGroupId);
     }
 
 }
