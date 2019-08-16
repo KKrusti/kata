@@ -42,4 +42,8 @@ public class AdGroupService {
         }
     }
 
+    public AdGroup create(AdGroup adGroup) {
+        return adGroupRepository.add(adGroup);
+    }
+
 }

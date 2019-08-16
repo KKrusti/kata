@@ -71,22 +71,7 @@ public class CampaignControllerTest {
                 .content(createdCampaignInJson(campaign)))
                 .andExpect(status().isForbidden())
                 .andExpect(jsonPath("$.message", is(errorMessage)));
-//                .andExpect(jsonPath("$.message", is(errorMessage)));
     }
-
-    // mvc.perform(get("/campaigns/" + 1 + "/adGroups/" + ADGROUP_ID))
-    //                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-    //                .andExpect(status().is4xxClientError())
-    //                .andExpect(jsonPath("$.message", is(errorMessage)));
-
-    //ApiError apiError = new ApiError("CampaignId = 1 , adGroupId = 1");
-    //        String errorMessage = ExceptionHandlerAdvice.COMBINATION_ID_ERROR_MESSAGE + apiError.getMessage();
-    //        when(mockAdGroupService.getAdGroupWithCampaign(1, ADGROUP_ID)).thenThrow(new WrongIdentifiersException(apiError.getMessage()));
-    //
-    //        mvc.perform(get("/campaigns/" + 1 + "/adGroups/" + ADGROUP_ID))
-    //                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-    //                .andExpect(status().is4xxClientError())
-    //                .andExpect(jsonPath("$.message", is(errorMessage)));
 
     private static String createdCampaignInJson(Campaign campaign) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();

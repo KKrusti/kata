@@ -2,6 +2,7 @@ package com.spaceboost.challenge.repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.spaceboost.challenge.exception.IdExistsException;
 import com.spaceboost.challenge.model.AdGroup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
@@ -40,9 +41,13 @@ public class AdGroupRepository implements ChallengeRepository<AdGroup> {
     }
 
     @Override
-    public AdGroup add(AdGroup adGroup) {
-        storedAdGroup.put(adGroup.getId(), adGroup);
-        return adGroup;
+    public AdGroup add(AdGroup adGroup) throws IdExistsException {
+        if (!storedAdGroup.containsKey(adGroup.getId())) {
+            storedAdGroup.put(adGroup.getId(), adGroup);
+            return adGroup;
+        } else {
+            throw new IdExistsException("AdGroup with id " + adGroup.getId() + " already exists");
+        }
     }
 
     @Override

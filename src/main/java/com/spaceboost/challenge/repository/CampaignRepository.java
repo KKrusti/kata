@@ -2,6 +2,7 @@ package com.spaceboost.challenge.repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.spaceboost.challenge.exception.IdExistsException;
 import com.spaceboost.challenge.model.Campaign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
@@ -39,9 +40,13 @@ public class CampaignRepository implements ChallengeRepository<Campaign> {
     }
 
     @Override
-    public Campaign add(Campaign campaign) {
-        storedCampaign.put(campaign.getId(), campaign);
-        return campaign;
+    public Campaign add(Campaign campaign) throws IdExistsException {
+        if (!storedCampaign.containsKey(campaign.getId())) {
+            storedCampaign.put(campaign.getId(), campaign);
+            return campaign;
+        } else {
+            throw new IdExistsException("Campaign with id " + campaign.getId() + " already exists");
+        }
     }
 
     @Override
