@@ -2,7 +2,6 @@ package com.spaceboost.challenge.repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.spaceboost.challenge.exception.IdExistsException;
 import com.spaceboost.challenge.model.Keyword;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
@@ -40,13 +39,9 @@ public class KeywordRepository implements ChallengeRepository<Keyword> {
     }
 
     @Override
-    public Keyword add(Keyword keyword) throws IdExistsException {
-        if (!storedKeyword.containsKey(keyword.getId())) {
-            storedKeyword.put(keyword.getId(), keyword);
-            return keyword;
-        } else {
-            throw new IdExistsException("Keyword with id " + keyword.getId() + " already exists");
-        }
+    public Keyword add(Keyword keyword) {
+        storedKeyword.put(keyword.getId(), keyword);
+        return keyword;
     }
 
     @Override

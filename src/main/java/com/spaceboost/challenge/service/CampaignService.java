@@ -33,7 +33,11 @@ public class CampaignService {
     }
 
     public Campaign create(Campaign campaign) throws IdExistsException {
-        return campaignRepository.add(campaign);
+        if (campaignRepository.findById(campaign.getId()) == null) {
+            return campaignRepository.add(campaign);
+        } else {
+            throw new IdExistsException("Campaign with id " + campaign.getId() + " already exists");
+        }
     }
 
 }

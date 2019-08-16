@@ -30,6 +30,10 @@ public class AdGroupService {
         }
     }
 
+    public List<AdGroup> getAll() {
+        return adGroupRepository.getAll();
+    }
+
     public List<AdGroup> getAdGroupsForCampaign(int campaignId) {
         return adGroupRepository.getAll().stream().filter(x -> x.getCampaignId() == campaignId).collect(Collectors.toList());
     }
@@ -44,7 +48,11 @@ public class AdGroupService {
     }
 
     public AdGroup create(AdGroup adGroup) throws IdExistsException {
-        return adGroupRepository.add(adGroup);
+        if (adGroupRepository.findById(adGroup.getId()) == null) {
+            return adGroupRepository.add(adGroup);
+        } else {
+            throw new IdExistsException("AdGroup with id " + adGroup.getId() + " already exists");
+        }
     }
 
 }

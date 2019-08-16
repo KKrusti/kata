@@ -32,6 +32,10 @@ public class KeywordService {
         }
     }
 
+    public List<Keyword> getAll() {
+        return keywordRepository.getAll();
+    }
+
     public Keyword getMostClicked() {
         return keywordRepository.getAll().stream().max(Comparator.comparing(Keyword::getClicks)).orElseThrow(() -> new IllegalArgumentException());
     }
@@ -54,7 +58,11 @@ public class KeywordService {
     }
 
     public Keyword create(Keyword keyword) throws IdExistsException {
-        return keywordRepository.add(keyword);
+        if (keywordRepository.findById(keyword.getId()) == null) {
+            return keywordRepository.add(keyword);
+        } else {
+            throw new IdExistsException("Keyword with id " + keyword.getId() + " already exists");
+        }
     }
 
 }

@@ -22,6 +22,7 @@ public class KeywordServiceTest {
     private static final int NON_EXISTING_KEYWORD_ID = 99999;
     private static final int MOST_CLICKED_ID = 27;
     private static final int MOST_CONVERTED_ID = 27;
+    private static final int INITIAL_KEYWORD_NUMBER = 30;
 
     @Autowired
     private KeywordService keywordService;
@@ -78,11 +79,27 @@ public class KeywordServiceTest {
     }
 
     @Test
-    public void withWrightIdentifierCombination_getKeywordWithCampaignAndAdGroupId_getKeyword() {
+    public void withRightIdentifierCombination_getKeywordWithCampaignAndAdGroupId_getKeyword() {
         Keyword expectedKeyword = new Keyword(0, 1, 12, 1, 0, 0.54f);
 
         Keyword keyword = keywordService.getKeywordWithCampaignAndAdGroupId(1, 12, 0);
 
         Assertions.assertEquals(expectedKeyword, keyword);
+    }
+
+    @Test
+    public void getAll() {
+        List<Keyword> keywords = keywordService.getAll();
+
+        Assertions.assertEquals(INITIAL_KEYWORD_NUMBER, keywords.size());
+    }
+
+    @Test
+    public void withNewKeyword_add_keywordCreated() {
+        int previousSize = keywordService.getAll().size();
+        Keyword keyword = new Keyword(99, 99, 99, 2, 50, 50.00f);
+        keywordService.create(keyword);
+        int postSize = keywordService.getAll().size();
+        Assertions.assertTrue(previousSize < postSize);
     }
 }
