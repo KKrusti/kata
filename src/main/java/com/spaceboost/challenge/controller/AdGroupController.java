@@ -7,6 +7,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
+
+import javax.validation.Valid;
+import java.net.URI;
 
 @Controller
 public class AdGroupController {
@@ -24,4 +30,12 @@ public class AdGroupController {
         AdGroup adGroup = adGroupService.getAdGroupWithCampaign(campaignId, adGroupId);
         return ResponseEntity.ok(adGroup);
     }
+
+    @PostMapping("adGroups")
+    public ResponseEntity<AdGroup> createAdGroup(@RequestBody @Valid AdGroup adGroup) {
+        AdGroup createdAdGroup = adGroupService.create(adGroup);
+        URI selfLink = MvcUriComponentsBuilder.fromController(getClass()).path("campaigns/{campaignId}/adGroups/{id}").buildAndExpand(createdAdGroup.getCampaignId(), createdAdGroup.getId()).toUri();
+        return ResponseEntity.created(selfLink).body(createdAdGroup);
+    }
+
 }

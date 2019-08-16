@@ -1,5 +1,8 @@
 package com.spaceboost.challenge.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.spaceboost.challenge.exception.AdGroupNotFoundException;
 import com.spaceboost.challenge.exception.ExceptionHandlerAdvice;
 import com.spaceboost.challenge.exception.WrongIdentifiersException;
 import com.spaceboost.challenge.model.ApiError;
@@ -17,6 +20,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(SpringExtension.class)
@@ -78,4 +83,74 @@ public class KeywordControllerTest {
                 .andExpect(jsonPath("$.conversions", is(5)))
                 .andExpect(jsonPath("$.cost", is(9.11)));
     }
+
+    @Test
+    public void withCorrectId_createKeyword_created() throws Exception {
+        Keyword keyword = new Keyword(61, 1, 1, 0, 0, 0);
+
+        when(mockKeywordService.create(keyword)).thenReturn(keyword);
+        mvc.perform(post("/keywords")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(createdKeywordInJson(keyword)))
+                .andDo(print())
+                .andExpect(status().isCreated());
+
+    }
+
+    @Test
+    public void withNonExistingAdGroup_createKeyword_errorResponse() throws Exception {
+        Keyword keyword = new Keyword(62, 1, 68, 0, 0, 0);
+        ApiError apiError = new ApiError(ExceptionHandlerAdvice.AD_GROUP_NOT_FOUND + keyword.getAdGroupId());
+        String errorMessage = apiError.getMessage();
+
+        when(mockKeywordService.create(keyword)).thenThrow(new AdGroupNotFoundException(keyword.getAdGroupId()));
+
+        mvc.perform(post("/keywords")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(createdKeywordInJson(keyword)))
+                .andExpect(status().isForbidden())
+                .andExpect(jsonPath("$.message", is(errorMessage)));
+    }
+
+    @Test
+    public void withInconsistentCampaignAndAdGroup_createKeyword_errorResponse() throws Exception {
+        Keyword keyword = new Keyword(62, 1, 3, 0, 0, 0);
+        ApiError apiError = new ApiError(ExceptionHandlerAdvice.COMBINATION_ID_ERROR_MESSAGE + "CampaignId = " + keyword.getCampaignId() + " , adGroupId = " + keyword.getAdGroupId());
+        String errorMessage = apiError.getMessage();
+
+        when(mockKeywordService.create(keyword)).thenThrow(new WrongIdentifiersException("CampaignId = " + keyword.getCampaignId() + " , adGroupId = " + keyword.getAdGroupId()));
+
+        mvc.perform(post("/keywords")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(createdKeywordInJson(keyword)))
+                .andExpect(status().isForbidden())
+                .andExpect(jsonPath("$.message", is(errorMessage)));
+    }
+
+
+    private static String createdKeywordInJson(Keyword keyword) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(keyword);
+    }
+
+    //    @Test
+    //    public void withNonExistingCampaign_createAdGroup_errorResponse() throws Exception {
+    //        AdGroup adGroup = new AdGroup(46, 69, 0, 0, 0);
+    //        ApiError apiError = new ApiError("campaign-not-found-" + adGroup.getCampaignId());
+    //        String errorMessage = apiError.getMessage();
+    //
+    //        when(mockAdGroupService.create(adGroup)).thenThrow(new CampaignNotFoundException(adGroup.getCampaignId()));
+    //
+    //        mvc.perform(post("/adGroups")
+    //                .contentType(MediaType.APPLICATION_JSON)
+    //                .content(createdAdGroupInJson(adGroup)))
+    //                .andExpect(status().isForbidden())
+    //                .andExpect(jsonPath("$.message", is(errorMessage)));
+    //    }
+    //
+    //    private static String createdAdGroupInJson(AdGroup adGroup) throws JsonProcessingException {
+    //        ObjectMapper mapper = new ObjectMapper();
+    //        return mapper.writeValueAsString(adGroup);
+    //    }
+
 }

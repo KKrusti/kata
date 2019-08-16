@@ -1,5 +1,8 @@
 package com.spaceboost.challenge.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.spaceboost.challenge.exception.CampaignNotFoundException;
 import com.spaceboost.challenge.exception.ExceptionHandlerAdvice;
 import com.spaceboost.challenge.exception.WrongIdentifiersException;
 import com.spaceboost.challenge.model.AdGroup;
@@ -17,6 +20,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(SpringExtension.class)
@@ -59,5 +64,37 @@ public class AdGroupControllerTest {
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.message", is(errorMessage)));
     }
-    
+
+    @Test
+    public void withCorrectId_createAdGroup_created() throws Exception {
+        AdGroup adGroup = new AdGroup(45, 1, 0, 0, 0);
+        when(mockAdGroupService.create(adGroup)).thenReturn(adGroup);
+
+        mvc.perform(post("/adGroups")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(createdAdGroupInJson(adGroup)))
+                .andDo(print())
+                .andExpect(status().isCreated());
+    }
+
+    @Test
+    public void withNonExistingCampaign_createAdGroup_errorResponse() throws Exception {
+        AdGroup adGroup = new AdGroup(46, 69, 0, 0, 0);
+        ApiError apiError = new ApiError(ExceptionHandlerAdvice.CAMPAIGN_NOT_FOUND + adGroup.getCampaignId());
+        String errorMessage = apiError.getMessage();
+
+        when(mockAdGroupService.create(adGroup)).thenThrow(new CampaignNotFoundException(adGroup.getCampaignId()));
+
+        mvc.perform(post("/adGroups")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(createdAdGroupInJson(adGroup)))
+                .andExpect(status().isForbidden())
+                .andExpect(jsonPath("$.message", is(errorMessage)));
+    }
+
+    private static String createdAdGroupInJson(AdGroup adGroup) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(adGroup);
+    }
+
 }

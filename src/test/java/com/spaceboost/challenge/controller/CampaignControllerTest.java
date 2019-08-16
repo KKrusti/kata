@@ -36,7 +36,7 @@ public class CampaignControllerTest {
     private MockMvc mvc;
 
     @Test
-    public void withRightId_shouldReturnCampaign() throws Exception {
+    public void withRightId_getCampaign_shouldReturnCampaign() throws Exception {
         Campaign campaign = new Campaign(CAMPAIGN_ID);
         when(mockCampaignService.getCampaign(CAMPAIGN_ID)).thenReturn(campaign);
 
