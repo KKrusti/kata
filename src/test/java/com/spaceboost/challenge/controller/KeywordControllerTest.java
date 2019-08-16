@@ -34,7 +34,7 @@ public class KeywordControllerTest {
     private MockMvc mvc;
 
     @Test
-    public void withWrightCombination_getKeyword_shouldReturnKeyword() throws Exception {
+    public void withRightCombination_getKeyword_shouldReturnKeyword() throws Exception {
         Keyword keyword = new Keyword(KEYWORD_ID, CAMPAIGN_ID, ADGROUP_ID, 1, 0, 0.54f);
 
         when(mockKeywordService.getKeywordWithCampaignAndAdGroupId(1, 12, 0)).thenReturn(keyword);
