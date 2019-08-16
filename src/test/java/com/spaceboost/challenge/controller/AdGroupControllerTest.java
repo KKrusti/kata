@@ -51,7 +51,7 @@ public class AdGroupControllerTest {
     @Test
     public void withWrongCombination_shouldReturnError() throws Exception {
         ApiError apiError = new ApiError("CampaignId = 1 , adGroupId = 1");
-        String errorMessage = ExceptionHandlerAdvice.ERROR_MESSAGE + apiError.getMessage();
+        String errorMessage = ExceptionHandlerAdvice.COMBINATION_ID_ERROR_MESSAGE + apiError.getMessage();
         when(mockAdGroupService.getAdGroupWithCampaign(1, ADGROUP_ID)).thenThrow(new WrongIdentifiersException(apiError.getMessage()));
 
         mvc.perform(get("/campaigns/" + 1 + "/adGroups/" + ADGROUP_ID))

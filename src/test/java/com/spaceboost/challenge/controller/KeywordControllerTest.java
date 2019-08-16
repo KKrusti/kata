@@ -53,7 +53,7 @@ public class KeywordControllerTest {
     @Test
     public void withWrongCombination_getKeyword_shouldReturnError() throws Exception {
         ApiError apiError = new ApiError("CampaignId = 1 , adGroupId = 1 , KeywordId = 1");
-        String errorMessage = ExceptionHandlerAdvice.ERROR_MESSAGE + apiError.getMessage();
+        String errorMessage = ExceptionHandlerAdvice.COMBINATION_ID_ERROR_MESSAGE + apiError.getMessage();
         when(mockKeywordService.getKeywordWithCampaignAndAdGroupId(1, 1, 1)).thenThrow(new WrongIdentifiersException(apiError.getMessage()));
 
         mvc.perform(get("/campaigns/" + 1 + "/adGroups/" + 1 + "/keywords/" + 1))

@@ -2,6 +2,9 @@ package com.spaceboost.challenge.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.spaceboost.challenge.exception.ExceptionHandlerAdvice;
+import com.spaceboost.challenge.exception.IdExistsException;
+import com.spaceboost.challenge.model.ApiError;
 import com.spaceboost.challenge.model.Campaign;
 import com.spaceboost.challenge.service.CampaignService;
 import org.junit.jupiter.api.Test;
@@ -48,12 +51,42 @@ public class CampaignControllerTest {
         Campaign campaign = new Campaign(50);
         when(mockCampaignService.create(campaign)).thenReturn(campaign);
 
-        mvc.perform(post("/campaigns/campaign")
+        mvc.perform(post("/campaigns")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(createdCampaignInJson(campaign)))
                 .andDo(print())
                 .andExpect(status().isCreated());
     }
+
+    @Test
+    public void withExistingCampaignId_createCampaign_errorThrown() throws Exception {
+        Campaign campaign = new Campaign(0);
+        ApiError apiError = new ApiError("CampaignId = 1");
+        String errorMessage = ExceptionHandlerAdvice.ID_EXISTS_MESSAGE + apiError.getMessage();
+
+        when(mockCampaignService.create(campaign)).thenThrow(new IdExistsException(apiError.getMessage()));
+
+        mvc.perform(post("/campaigns")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(createdCampaignInJson(campaign)))
+                .andExpect(status().isForbidden())
+                .andExpect(jsonPath("$.message", is(errorMessage)));
+//                .andExpect(jsonPath("$.message", is(errorMessage)));
+    }
+
+    // mvc.perform(get("/campaigns/" + 1 + "/adGroups/" + ADGROUP_ID))
+    //                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+    //                .andExpect(status().is4xxClientError())
+    //                .andExpect(jsonPath("$.message", is(errorMessage)));
+
+    //ApiError apiError = new ApiError("CampaignId = 1 , adGroupId = 1");
+    //        String errorMessage = ExceptionHandlerAdvice.COMBINATION_ID_ERROR_MESSAGE + apiError.getMessage();
+    //        when(mockAdGroupService.getAdGroupWithCampaign(1, ADGROUP_ID)).thenThrow(new WrongIdentifiersException(apiError.getMessage()));
+    //
+    //        mvc.perform(get("/campaigns/" + 1 + "/adGroups/" + ADGROUP_ID))
+    //                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+    //                .andExpect(status().is4xxClientError())
+    //                .andExpect(jsonPath("$.message", is(errorMessage)));
 
     private static String createdCampaignInJson(Campaign campaign) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();

@@ -30,7 +30,7 @@ public class CampaignController {
         return ResponseEntity.ok(campaignService.getCampaign(id));
     }
 
-    @PostMapping("campaigns/campaign")
+    @PostMapping("campaigns")
     public ResponseEntity<Campaign> createCampaign(@RequestBody @Valid Campaign campaign) {
         Campaign createdCampaign = campaignService.create(campaign);
         URI selfLink = MvcUriComponentsBuilder.fromController(getClass()).path("campaigns/{id}").buildAndExpand(createdCampaign.getId()).toUri();
