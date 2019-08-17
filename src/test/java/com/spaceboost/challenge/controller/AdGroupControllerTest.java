@@ -39,7 +39,7 @@ public class AdGroupControllerTest {
 
     @Test
     public void withRightCombination_getAdGroup_shouldReturnadGroup() throws Exception {
-        AdGroup adGroup = new AdGroup(ADGROUP_ID, CAMPAIGN_ID, 83, 17, 1.43f);
+        AdGroup adGroup = new AdGroup(ADGROUP_ID, CAMPAIGN_ID, 83, 17, 1.43d);
 
         when(mockAdGroupService.getAdGroupWithCampaign(CAMPAIGN_ID, ADGROUP_ID)).thenReturn(adGroup);
 
@@ -67,7 +67,7 @@ public class AdGroupControllerTest {
 
     @Test
     public void withCorrectId_createAdGroup_created() throws Exception {
-        AdGroup adGroup = new AdGroup(45, 1, 0, 0, 0);
+        AdGroup adGroup = new AdGroup(45, 1, 0, 0, 0d);
         when(mockAdGroupService.create(adGroup)).thenReturn(adGroup);
 
         mvc.perform(post("/adGroups")
@@ -79,7 +79,7 @@ public class AdGroupControllerTest {
 
     @Test
     public void withNonExistingCampaign_createAdGroup_errorResponse() throws Exception {
-        AdGroup adGroup = new AdGroup(46, 69, 0, 0, 0);
+        AdGroup adGroup = new AdGroup(46, 69, 0, 0, 0d);
         ApiError apiError = new ApiError(ExceptionHandlerAdvice.CAMPAIGN_NOT_FOUND + adGroup.getCampaignId());
         String errorMessage = apiError.getMessage();
 

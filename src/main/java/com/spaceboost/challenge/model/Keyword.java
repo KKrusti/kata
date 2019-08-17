@@ -21,6 +21,6 @@ public class Keyword {
     private int adGroupId;
     private int clicks;
     private int conversions;
-    private float cost;
+    private Double cost;
 
 }

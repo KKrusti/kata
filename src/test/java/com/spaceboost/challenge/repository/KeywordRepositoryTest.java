@@ -30,7 +30,7 @@ public class KeywordRepositoryTest {
     @Test
     public void withExistingDataInJSon_findById_keywordFound() {
         Keyword retrievedKeyword = keywordRepository.findById(EXISTING_KEYWORD_ID);
-        Keyword expectedKeyword = new Keyword(EXISTING_KEYWORD_ID, 2, 11, 3, 1, 2.14f);
+        Keyword expectedKeyword = new Keyword(EXISTING_KEYWORD_ID, 2, 11, 3, 1, 2.14);
 
         Assertions.assertEquals(expectedKeyword, retrievedKeyword);
     }

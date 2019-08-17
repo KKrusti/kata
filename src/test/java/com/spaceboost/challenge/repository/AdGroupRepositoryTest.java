@@ -23,7 +23,7 @@ public class AdGroupRepositoryTest {
     @Test
     public void withExistingAdGroup_findById_adGroupFound() {
         AdGroup retrievedAdGroup = adGroupRepository.findById(EXISTING_ADGROUP_ID);
-        AdGroup expectedAdGroup = new AdGroup(EXISTING_ADGROUP_ID, 0, 54, 23, 28.17f);
+        AdGroup expectedAdGroup = new AdGroup(EXISTING_ADGROUP_ID, 0, 54, 23, 28.17);
         Assertions.assertEquals(expectedAdGroup, retrievedAdGroup);
     }
 

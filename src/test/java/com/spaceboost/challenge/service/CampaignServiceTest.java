@@ -4,11 +4,13 @@ import com.spaceboost.challenge.Application;
 import com.spaceboost.challenge.exception.CampaignNotFoundException;
 import com.spaceboost.challenge.exception.IdExistsException;
 import com.spaceboost.challenge.model.Campaign;
+import com.spaceboost.challenge.model.CostConversionRateResult;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @SpringBootTest(classes = {CampaignService.class, Application.class})
@@ -59,5 +61,13 @@ public class CampaignServiceTest {
         Assertions.assertThrows(IdExistsException.class, () -> campaignService.create(campaign));
     }
 
+    @Test
+    public void withDefaultValues_getCostPerConversionRate_correctValues() {
+        CostConversionRateResult costConversionRateResult = campaignService.getWorstCostPerConversionRate();
+
+        CostConversionRateResult expected = new CostConversionRateResult(3, new BigDecimal("7.92"));
+
+        Assertions.assertEquals(expected, costConversionRateResult);
+    }
 
 }

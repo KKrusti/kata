@@ -4,13 +4,16 @@ import com.spaceboost.challenge.exception.AdGroupNotFoundException;
 import com.spaceboost.challenge.exception.IdExistsException;
 import com.spaceboost.challenge.exception.KeywordNotFoundException;
 import com.spaceboost.challenge.exception.WrongIdentifiersException;
+import com.spaceboost.challenge.model.CostPerCampaign;
 import com.spaceboost.challenge.model.Keyword;
 import com.spaceboost.challenge.repository.KeywordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -61,13 +64,24 @@ public class KeywordService {
         }
     }
 
-    public Keyword create(Keyword keyword) throws IdExistsException, AdGroupNotFoundException, WrongIdentifiersException {
+    public Map<Integer, CostPerCampaign> getCostPerCampaign() {
+        Map<Integer, CostPerCampaign> costAndConversionMap = new HashMap<>();
+
+        keywordRepository.getAll().stream().collect(Collectors.groupingBy(Keyword::getCampaignId)).forEach((campaignId, keyWords) ->
+                costAndConversionMap.put(campaignId, new CostPerCampaign(
+                        keyWords.stream().mapToDouble(Keyword::getCost).sum(),
+                        keyWords.stream().mapToDouble(Keyword::getConversions).sum())));
+
+        return costAndConversionMap;
+    }
+
+    public Keyword create(Keyword keyword) {
         keywordIsNew(keyword.getId());
         adGroupAndCampaignExist(keyword.getCampaignId(), keyword.getAdGroupId());
         return keywordRepository.add(keyword);
     }
 
-    private void keywordIsNew(int keywordId) throws IdExistsException {
+    private void keywordIsNew(int keywordId) {
         if (keywordRepository.findById(keywordId) != null) {
             throw new IdExistsException("Keyword with id " + keywordId + " already exists");
         }
@@ -83,7 +97,7 @@ public class KeywordService {
      * @throws AdGroupNotFoundException  if the AdGroup doesn't exist
      * @throws WrongIdentifiersException if there's a mismatch between campaignId of the keyword and the campaignId of the AdGroup
      */
-    private void adGroupAndCampaignExist(int campaignId, int adGroupId) throws AdGroupNotFoundException, WrongIdentifiersException {
+    private void adGroupAndCampaignExist(int campaignId, int adGroupId) {
         adGroupService.getAdGroupWithCampaign(campaignId, adGroupId);
     }
 

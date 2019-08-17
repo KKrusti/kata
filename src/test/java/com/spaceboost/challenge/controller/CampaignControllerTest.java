@@ -6,6 +6,7 @@ import com.spaceboost.challenge.exception.ExceptionHandlerAdvice;
 import com.spaceboost.challenge.exception.IdExistsException;
 import com.spaceboost.challenge.model.ApiError;
 import com.spaceboost.challenge.model.Campaign;
+import com.spaceboost.challenge.model.CostConversionRateResult;
 import com.spaceboost.challenge.service.CampaignService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,6 +16,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.math.BigDecimal;
 
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
@@ -28,6 +31,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class CampaignControllerTest {
 
     private static final int CAMPAIGN_ID = 1;
+    private static final int COST_CONVERSION_CAMPAIGN_ID = 3;
+    private static final BigDecimal COST_CONVERSION_RATE = new BigDecimal(7.92d);
 
     @MockBean
     private CampaignService mockCampaignService;
@@ -71,6 +76,19 @@ public class CampaignControllerTest {
                 .content(createdCampaignInJson(campaign)))
                 .andExpect(status().isForbidden())
                 .andExpect(jsonPath("$.message", is(errorMessage)));
+    }
+
+    @Test
+    public void withInitialValues_getWorstCostPerConversionRate_returnMessage() throws Exception {
+        CostConversionRateResult costConversionRateResult = new CostConversionRateResult(COST_CONVERSION_CAMPAIGN_ID, COST_CONVERSION_RATE);
+
+        when(mockCampaignService.getWorstCostPerConversionRate()).thenReturn(costConversionRateResult);
+
+        mvc.perform(get("/worstCostConversionRate"))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(jsonPath("$.campaignId", is(COST_CONVERSION_CAMPAIGN_ID)))
+                .andExpect(jsonPath("$.costConversionRate", is(COST_CONVERSION_RATE)));
     }
 
     private static String createdCampaignInJson(Campaign campaign) throws JsonProcessingException {

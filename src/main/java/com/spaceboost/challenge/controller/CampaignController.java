@@ -1,6 +1,7 @@
 package com.spaceboost.challenge.controller;
 
 import com.spaceboost.challenge.model.Campaign;
+import com.spaceboost.challenge.model.CostConversionRateResult;
 import com.spaceboost.challenge.service.CampaignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -37,4 +38,9 @@ public class CampaignController {
         return ResponseEntity.created(selfLink).body(createdCampaign);
     }
 
+    @GetMapping("worstCostConversionRate")
+    public ResponseEntity<CostConversionRateResult> getWorstCostConversionRate() {
+        CostConversionRateResult result = campaignService.getWorstCostPerConversionRate();
+        return ResponseEntity.ok(result);
+    }
 }

@@ -18,5 +18,5 @@ public class AdGroup {
     private int campaignId;
     private int clicks;
     private int conversions;
-    private float cost;
+    private Double cost;
 }

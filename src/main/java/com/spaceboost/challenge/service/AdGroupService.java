@@ -1,15 +1,19 @@
 package com.spaceboost.challenge.service;
 
 import com.spaceboost.challenge.exception.AdGroupNotFoundException;
-import com.spaceboost.challenge.exception.CampaignNotFoundException;
 import com.spaceboost.challenge.exception.IdExistsException;
 import com.spaceboost.challenge.exception.WrongIdentifiersException;
 import com.spaceboost.challenge.model.AdGroup;
+import com.spaceboost.challenge.model.CostPerCampaign;
 import com.spaceboost.challenge.repository.AdGroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -42,7 +46,7 @@ public class AdGroupService {
         return adGroupRepository.getAll().stream().filter(x -> x.getCampaignId() == campaignId).collect(Collectors.toList());
     }
 
-    public AdGroup getAdGroupWithCampaign(int campaignId, int adGroupId) throws WrongIdentifiersException {
+    public AdGroup getAdGroupWithCampaign(int campaignId, int adGroupId) {
         AdGroup adGroup = getAdgroup(adGroupId);
         if (adGroup.getCampaignId() == campaignId) {
             return adGroup;
@@ -51,17 +55,28 @@ public class AdGroupService {
         }
     }
 
-    public AdGroup create(AdGroup adGroup) throws IdExistsException, CampaignNotFoundException {
+    public AdGroup create(AdGroup adGroup) {
         adGroupIsNew(adGroup.getId());
         campaignExists(adGroup.getCampaignId());
         return adGroupRepository.add(adGroup);
     }
 
-    private void campaignExists(int campaignId) throws CampaignNotFoundException {
+    public Map<Integer, CostPerCampaign> getCostPerCampaign() {
+        Map<Integer, CostPerCampaign> costAndConversionMap = new HashMap<>();
+
+        adGroupRepository.getAll().stream().collect(Collectors.groupingBy(AdGroup::getCampaignId)).forEach((campaignId, keyWords) ->
+                costAndConversionMap.put(campaignId, new CostPerCampaign(
+                        BigDecimal.valueOf(keyWords.stream().mapToDouble(AdGroup::getCost).sum()).setScale(2, RoundingMode.CEILING).doubleValue(),
+                        keyWords.stream().mapToDouble(AdGroup::getConversions).sum())));
+
+        return costAndConversionMap;
+    }
+
+    private void campaignExists(int campaignId) {
         campaignService.getCampaign(campaignId);
     }
 
-    private void adGroupIsNew(int adGroupId) throws IdExistsException {
+    private void adGroupIsNew(int adGroupId) {
         if (adGroupRepository.findById(adGroupId) != null) {
             throw new IdExistsException("AdGroup with id " + adGroupId + " already exists");
         }

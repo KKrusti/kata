@@ -40,7 +40,7 @@ public class KeywordControllerTest {
 
     @Test
     public void withRightCombination_getKeyword_shouldReturnKeyword() throws Exception {
-        Keyword keyword = new Keyword(KEYWORD_ID, CAMPAIGN_ID, ADGROUP_ID, 1, 0, 0.54f);
+        Keyword keyword = new Keyword(KEYWORD_ID, CAMPAIGN_ID, ADGROUP_ID, 1, 0, 0.54);
 
         when(mockKeywordService.getKeywordWithCampaignAndAdGroupId(1, 12, 0)).thenReturn(keyword);
 
@@ -70,7 +70,7 @@ public class KeywordControllerTest {
     @Test
     public void withOriginalData_getMostClicked_returnKeyword() throws Exception {
         //given
-        Keyword mostClickedKeyword = new Keyword(27, 0, 3, 11, 5, 9.11f);
+        Keyword mostClickedKeyword = new Keyword(27, 0, 3, 11, 5, 9.11);
         when(mockKeywordService.getMostClicked()).thenReturn(mostClickedKeyword);
 
         mvc.perform(get("/keywords/mostClicked"))
@@ -86,7 +86,7 @@ public class KeywordControllerTest {
 
     @Test
     public void withCorrectId_createKeyword_created() throws Exception {
-        Keyword keyword = new Keyword(61, 1, 1, 0, 0, 0);
+        Keyword keyword = new Keyword(61, 1, 1, 0, 0, 0d);
 
         when(mockKeywordService.create(keyword)).thenReturn(keyword);
         mvc.perform(post("/keywords")
@@ -99,7 +99,7 @@ public class KeywordControllerTest {
 
     @Test
     public void withNonExistingAdGroup_createKeyword_errorResponse() throws Exception {
-        Keyword keyword = new Keyword(62, 1, 68, 0, 0, 0);
+        Keyword keyword = new Keyword(62, 1, 68, 0, 0, 0d);
         ApiError apiError = new ApiError(ExceptionHandlerAdvice.AD_GROUP_NOT_FOUND + keyword.getAdGroupId());
         String errorMessage = apiError.getMessage();
 
@@ -114,7 +114,7 @@ public class KeywordControllerTest {
 
     @Test
     public void withInconsistentCampaignAndAdGroup_createKeyword_errorResponse() throws Exception {
-        Keyword keyword = new Keyword(62, 1, 3, 0, 0, 0);
+        Keyword keyword = new Keyword(62, 1, 3, 0, 0, 0d);
         ApiError apiError = new ApiError(ExceptionHandlerAdvice.COMBINATION_ID_ERROR_MESSAGE + "CampaignId = " + keyword.getCampaignId() + " , adGroupId = " + keyword.getAdGroupId());
         String errorMessage = apiError.getMessage();
 
