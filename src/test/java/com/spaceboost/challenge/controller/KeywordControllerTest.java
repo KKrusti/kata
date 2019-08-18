@@ -85,6 +85,23 @@ public class KeywordControllerTest {
     }
 
     @Test
+    public void withOriginalData_getMostConversion_returnKeyword() throws Exception {
+        //given
+        Keyword mostConversionKeyword = new Keyword(27, 0, 3, 11, 5, 9.11);
+        when(mockKeywordService.getMostConversions()).thenReturn(mostConversionKeyword);
+
+        mvc.perform(get("/keywords/mostConversions"))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(jsonPath("$.id", is(27)))
+                .andExpect(jsonPath("$.campaignId", is(0)))
+                .andExpect(jsonPath("$.adGroupId", is(3)))
+                .andExpect(jsonPath("$.clicks", is(11)))
+                .andExpect(jsonPath("$.conversions", is(5)))
+                .andExpect(jsonPath("$.cost", is(9.11)));
+    }
+
+    @Test
     public void withCorrectId_createKeyword_created() throws Exception {
         Keyword keyword = new Keyword(61, 1, 1, 0, 0, 0d);
 

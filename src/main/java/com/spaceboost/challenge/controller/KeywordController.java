@@ -37,6 +37,12 @@ public class KeywordController {
         return ResponseEntity.ok(keyword);
     }
 
+    @GetMapping("keywords/mostConversions")
+    public ResponseEntity<Keyword> getMostConversions() {
+        Keyword keyword = keywordService.getMostConversions();
+        return ResponseEntity.ok(keyword);
+    }
+
     @PostMapping("keywords")
     public ResponseEntity<Keyword> createKeyword(@RequestBody @Valid Keyword keyword) {
         Keyword createdKeyword = keywordService.create(keyword);
