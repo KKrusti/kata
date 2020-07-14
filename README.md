@@ -1,4 +1,4 @@
-# Spaceboost code challenge
+# code challenge
 
 Welcome to the Spaceboost code challenge. We would like to have a restful API in order to manage the creation of our entities and obtain some statistics. 
 
