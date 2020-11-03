@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import javax.persistence.Id;
 
 @Data
 @NoArgsConstructor
@@ -12,7 +11,6 @@ import javax.persistence.Id;
 @Getter
 public class Keyword {
 
-    @Id
     private int id;
     private int campaignId;
     private int adGroupId;
