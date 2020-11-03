@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
-
-import javax.validation.Valid;
 import java.net.URI;
 
 @Controller
@@ -32,7 +30,7 @@ public class CampaignController {
     }
 
     @PostMapping("campaigns")
-    public ResponseEntity<Campaign> createCampaign(@RequestBody @Valid Campaign campaign) {
+    public ResponseEntity<Campaign> createCampaign(@RequestBody Campaign campaign) {
         Campaign createdCampaign = campaignService.create(campaign);
         URI selfLink = MvcUriComponentsBuilder.fromController(getClass()).path("campaigns/{id}").buildAndExpand(createdCampaign.getId()).toUri();
         return ResponseEntity.created(selfLink).body(createdCampaign);

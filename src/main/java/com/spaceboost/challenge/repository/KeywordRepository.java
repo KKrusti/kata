@@ -1,15 +1,17 @@
 package com.spaceboost.challenge.repository;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.spaceboost.challenge.model.Keyword;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Repository;
-
 import javax.annotation.PostConstruct;
-import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.Reader;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -18,19 +20,25 @@ import java.util.concurrent.ConcurrentHashMap;
 @Repository
 public class KeywordRepository implements ChallengeRepository<Keyword> {
 
-    private static final String JSON_PATH = "classpath:entities/keywords.json";
     @Autowired
     private ResourceLoader resourceLoader;
+
+    private static final String JSON_PATH = "classpath:entities/keywords.json";
     private Map<Integer, Keyword> storedKeyword = new ConcurrentHashMap<>();
 
-    @Override
     @PostConstruct
-    public void loadObjectsFromJson() throws IOException {
-        final ObjectMapper jsonMapper = new ObjectMapper();
-        final File repositoryJsonFile = resourceLoader.getResource(JSON_PATH).getFile();
-        List<Keyword> loadedKeywordList = jsonMapper.readValue(repositoryJsonFile, new TypeReference<List<Keyword>>() {
-        });
-        loadedKeywordList.forEach(keyword -> storedKeyword.put(keyword.getId(), keyword));
+    @Override
+    public void loadObjectsFromJson() {
+        try (Reader reader = new FileReader(resourceLoader.getResource(JSON_PATH).getFile())) {
+            Type listType = new TypeToken<ArrayList<Keyword>>() {
+            }.getType();
+            List<Keyword> loadedKeywords = new Gson().fromJson(reader, listType);
+            loadedKeywords.forEach(keyword -> storedKeyword.put(keyword.getId(), keyword));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
