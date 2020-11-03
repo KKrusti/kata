@@ -68,7 +68,7 @@ public class KeywordService {
         return costAndConversionMap;
     }
 
-    public Keyword create(Keyword keyword) {
+    public Keyword create(Keyword keyword) throws AdGroupNotFoundException {
         keywordIsNew(keyword.getId());
         adGroupAndCampaignExist(keyword.getCampaignId(), keyword.getAdGroupId());
         return keywordRepository.add(keyword);
@@ -90,7 +90,7 @@ public class KeywordService {
      * @throws AdGroupNotFoundException  if the AdGroup doesn't exist
      * @throws WrongIdentifiersException if there's a mismatch between campaignId of the keyword and the campaignId of the AdGroup
      */
-    private void adGroupAndCampaignExist(int campaignId, int adGroupId) {
+    private void adGroupAndCampaignExist(int campaignId, int adGroupId) throws AdGroupNotFoundException{
         adGroupService.getAdGroupWithCampaign(campaignId, adGroupId);
     }
 

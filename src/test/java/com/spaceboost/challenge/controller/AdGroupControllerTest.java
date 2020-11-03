@@ -7,6 +7,7 @@ import com.spaceboost.challenge.exception.ExceptionHandlerAdvice;
 import com.spaceboost.challenge.exception.WrongIdentifiersException;
 import com.spaceboost.challenge.model.AdGroup;
 import com.spaceboost.challenge.model.ApiError;
+import com.spaceboost.challenge.model.Campaign;
 import com.spaceboost.challenge.service.AdGroupService;
 import static org.hamcrest.Matchers.is;
 import org.junit.jupiter.api.Test;

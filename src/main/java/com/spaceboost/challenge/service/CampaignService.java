@@ -33,7 +33,7 @@ public class CampaignService {
         this.campaignRepository = campaignRepository;
     }
 
-    public Campaign getCampaign(int campaignId) {
+    public Campaign getCampaign(int campaignId) throws CampaignNotFoundException {
         return campaignRepository.findById(campaignId).orElseThrow(() -> new CampaignNotFoundException(campaignId));
     }
 
