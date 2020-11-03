@@ -8,21 +8,22 @@ import com.spaceboost.challenge.exception.WrongIdentifiersException;
 import com.spaceboost.challenge.model.AdGroup;
 import com.spaceboost.challenge.model.ApiError;
 import com.spaceboost.challenge.service.AdGroupService;
+import static org.hamcrest.Matchers.is;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import static org.mockito.Mockito.when;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-
-import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(AdGroupController.class)
@@ -44,7 +45,7 @@ public class AdGroupControllerTest {
         when(mockAdGroupService.getAdGroupWithCampaign(CAMPAIGN_ID, ADGROUP_ID)).thenReturn(adGroup);
 
         mvc.perform(get("/campaigns/" + CAMPAIGN_ID + "/adGroups/" + ADGROUP_ID))
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$.id", is(ADGROUP_ID)))
                 .andExpect(jsonPath("$.campaignId", is(CAMPAIGN_ID)))
@@ -60,7 +61,7 @@ public class AdGroupControllerTest {
         when(mockAdGroupService.getAdGroupWithCampaign(1, ADGROUP_ID)).thenThrow(new WrongIdentifiersException(apiError.getMessage()));
 
         mvc.perform(get("/campaigns/" + 1 + "/adGroups/" + ADGROUP_ID))
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.message", is(errorMessage)));
     }

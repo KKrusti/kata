@@ -8,21 +8,22 @@ import com.spaceboost.challenge.exception.WrongIdentifiersException;
 import com.spaceboost.challenge.model.ApiError;
 import com.spaceboost.challenge.model.Keyword;
 import com.spaceboost.challenge.service.KeywordService;
+import static org.hamcrest.Matchers.is;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import static org.mockito.Mockito.when;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-
-import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(KeywordController.class)
@@ -45,7 +46,7 @@ public class KeywordControllerTest {
         when(mockKeywordService.getKeywordWithCampaignAndAdGroupId(1, 12, 0)).thenReturn(keyword);
 
         mvc.perform(get("/campaigns/" + CAMPAIGN_ID + "/adGroups/" + ADGROUP_ID + "/keywords/" + KEYWORD_ID))
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$.id", is(KEYWORD_ID)))
                 .andExpect(jsonPath("$.campaignId", is(CAMPAIGN_ID)))
@@ -62,7 +63,7 @@ public class KeywordControllerTest {
         when(mockKeywordService.getKeywordWithCampaignAndAdGroupId(1, 1, 1)).thenThrow(new WrongIdentifiersException(apiError.getMessage()));
 
         mvc.perform(get("/campaigns/" + 1 + "/adGroups/" + 1 + "/keywords/" + 1))
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.message", is(errorMessage)));
     }
@@ -74,7 +75,7 @@ public class KeywordControllerTest {
         when(mockKeywordService.getMostClicked()).thenReturn(mostClickedKeyword);
 
         mvc.perform(get("/keywords/mostClicked"))
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$.id", is(27)))
                 .andExpect(jsonPath("$.campaignId", is(0)))
@@ -91,7 +92,7 @@ public class KeywordControllerTest {
         when(mockKeywordService.getMostConversions()).thenReturn(mostConversionKeyword);
 
         mvc.perform(get("/keywords/mostConversions"))
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$.id", is(27)))
                 .andExpect(jsonPath("$.campaignId", is(0)))
@@ -132,7 +133,8 @@ public class KeywordControllerTest {
     @Test
     public void withInconsistentCampaignAndAdGroup_createKeyword_errorResponse() throws Exception {
         Keyword keyword = new Keyword(62, 1, 3, 0, 0, 0d);
-        ApiError apiError = new ApiError(ExceptionHandlerAdvice.COMBINATION_ID_ERROR_MESSAGE + "CampaignId = " + keyword.getCampaignId() + " , adGroupId = " + keyword.getAdGroupId());
+        ApiError apiError =
+                new ApiError(ExceptionHandlerAdvice.COMBINATION_ID_ERROR_MESSAGE + "CampaignId = " + keyword.getCampaignId() + " , adGroupId = " + keyword.getAdGroupId());
         String errorMessage = apiError.getMessage();
 
         when(mockKeywordService.create(keyword)).thenThrow(new WrongIdentifiersException("CampaignId = " + keyword.getCampaignId() + " , adGroupId = " + keyword.getAdGroupId()));
