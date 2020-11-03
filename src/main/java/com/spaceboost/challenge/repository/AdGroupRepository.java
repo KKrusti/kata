@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Repository;
 import javax.annotation.PostConstruct;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -15,6 +14,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
@@ -28,30 +28,18 @@ public class AdGroupRepository implements ChallengeRepository<AdGroup> {
 
     @PostConstruct
     @Override
-    public void loadObjectsFromJson() {
+    public void loadObjectsFromJson() throws IOException {
         try (Reader reader = new FileReader(resourceLoader.getResource(JSON_PATH).getFile())) {
             Type listType = new TypeToken<ArrayList<AdGroup>>() {
             }.getType();
             List<AdGroup> loadedAdGroups = new Gson().fromJson(reader, listType);
             loadedAdGroups.forEach(adGroup -> storedAdGroup.put(adGroup.getId(), adGroup));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
-//    @PostConstruct
-//    @Override
-//    public void loadObjectsFromJson() {
-//        List<AdGroup> test = new ArrayList<>();
-//        test = loadObjectsFromJson(JSON_PATH);
-//        test.forEach(adGroup -> storedAdGroup.put(adGroup.getId(), adGroup));
-//    }
-
     @Override
-    public AdGroup findById(int id) {
-        return storedAdGroup.get(id);
+    public Optional<AdGroup> findById(int id) {
+        return Optional.ofNullable(storedAdGroup.get(id));
     }
 
     @Override

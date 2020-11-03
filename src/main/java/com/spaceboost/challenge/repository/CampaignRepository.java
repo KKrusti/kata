@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Repository;
 import javax.annotation.PostConstruct;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -15,6 +14,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
@@ -27,22 +27,18 @@ public class CampaignRepository implements ChallengeRepository<Campaign> {
 
     @PostConstruct
     @Override
-    public void loadObjectsFromJson() {
+    public void loadObjectsFromJson() throws IOException {
         try (Reader reader = new FileReader(resourceLoader.getResource(JSON_PATH).getFile())) {
             Type listType = new TypeToken<ArrayList<Campaign>>() {
             }.getType();
             List<Campaign> loadedCampaigns = new Gson().fromJson(reader, listType);
             loadedCampaigns.forEach(campaign -> storedCampaign.put(campaign.getId(), campaign));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
     @Override
-    public Campaign findById(int id) {
-        return storedCampaign.get(id);
+    public Optional<Campaign> findById(int id) {
+        return Optional.ofNullable(storedCampaign.get(id));
     }
 
     @Override

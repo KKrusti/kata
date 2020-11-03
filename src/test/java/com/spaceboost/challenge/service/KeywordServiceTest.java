@@ -14,14 +14,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {KeywordService.class, Application.class})
-public class KeywordServiceTest {
+class KeywordServiceTest {
 
     private static final int EXISTING_KEYWORD_ID = 3;
     private static final int NON_EXISTING_KEYWORD_ID = 99999;
@@ -36,14 +35,14 @@ public class KeywordServiceTest {
     private KeywordRepository repository;
 
     @Test
-    public void withInitialStatus_getAll() {
+    void withInitialStatus_getAll() {
         List<Keyword> keywords = keywordService.getAll();
 
         Assertions.assertEquals(repository.getAll().size(), keywords.size());
     }
 
     @Test
-    public void withExistingKeyword_findById_keywordFound() {
+    void withExistingKeyword_findById_keywordFound() {
         Keyword retrievedKeyword = keywordService.getKeyword(EXISTING_KEYWORD_ID);
         Keyword expectedKeyword = new Keyword(EXISTING_KEYWORD_ID, 2, 11, 3, 1, 2.14d);
 
@@ -51,28 +50,28 @@ public class KeywordServiceTest {
     }
 
     @Test
-    public void withNonExistingKeyword_findById_exceptionThrown() {
+    void withNonExistingKeyword_findById_exceptionThrown() {
         Assertions.assertThrows(KeywordNotFoundException.class, () -> {
             keywordService.getKeyword(NON_EXISTING_KEYWORD_ID);
         });
     }
 
     @Test
-    public void withExistingDataInJson_getMostClick_keywordReturned() {
+    void withExistingDataInJson_getMostClick_keywordReturned() {
         Keyword keyword = keywordService.getMostClicked();
 
         Assertions.assertEquals(MOST_CLICKED_ID, keyword.getId());
     }
 
     @Test
-    public void withExistingDataInJson_getMostConversions_keywordReturned() {
+    void withExistingDataInJson_getMostConversions_keywordReturned() {
         Keyword keyword = keywordService.getMostConversions();
 
         Assertions.assertEquals(MOST_CONVERTED_ID, keyword.getId());
     }
 
     @Test
-    public void withExistingCampaign_getKeywordsForCampaign_getList() {
+    void withExistingCampaign_getKeywordsForCampaign_getList() {
         List<Keyword> keywords = keywordService.getKeywordsForCampaignId(1);
 
         List<Keyword> expectedKeywords = new ArrayList<>();
@@ -88,13 +87,13 @@ public class KeywordServiceTest {
     }
 
     @Test
-    public void withWrongIdentifierCombination_getKeywordWithCampaignAndAdGroupId_throwException() {
+    void withWrongIdentifierCombination_getKeywordWithCampaignAndAdGroupId_throwException() {
         Assertions.assertThrows(WrongIdentifiersException.class, () ->
                 keywordService.getKeywordWithCampaignAndAdGroupId(1, 1, 1));
     }
 
     @Test
-    public void withRightIdentifierCombination_getKeywordWithCampaignAndAdGroupId_getKeyword() {
+    void withRightIdentifierCombination_getKeywordWithCampaignAndAdGroupId_getKeyword() {
         Keyword expectedKeyword = new Keyword(0, 1, 12, 1, 0, 0.54d);
 
         Keyword keyword = keywordService.getKeywordWithCampaignAndAdGroupId(1, 12, 0);
@@ -103,7 +102,7 @@ public class KeywordServiceTest {
     }
 
     @Test
-    public void withNewKeyword_create_keywordCreated() {
+    void withNewKeyword_create_keywordCreated() {
         int previousSize = keywordService.getAll().size();
         Keyword keyword = new Keyword(99, 2, 6, 2, 0, 0d);
         keywordService.create(keyword);
@@ -112,25 +111,25 @@ public class KeywordServiceTest {
     }
 
     @Test
-    public void withDuplicatedKeyword_create_errorThrown() {
+    void withDuplicatedKeyword_create_errorThrown() {
         Keyword keyword = new Keyword(0, 0, 0, 0, 0, 0d);
         Assertions.assertThrows(IdExistsException.class, () -> keywordService.create(keyword));
     }
 
     @Test
-    public void withNotExistingAdGroup_create_errorThrown() {
+    void withNotExistingAdGroup_create_errorThrown() {
         Keyword keyword = new Keyword(666, 2, 999, 2, 50, 50.00d);
         Assertions.assertThrows(AdGroupNotFoundException.class, () -> keywordService.create(keyword));
     }
 
     @Test
-    public void withExistingAdGroupWrongCampaign_create_errorThrown() {
+    void withExistingAdGroupWrongCampaign_create_errorThrown() {
         Keyword keyword = new Keyword(111, 1, 6, 2, 50, 50.00d);
         Assertions.assertThrows(WrongIdentifiersException.class, () -> keywordService.create(keyword));
     }
 
     @Test
-    public void withExistingAdGroupRightCampaign_create_keywordCreated() {
+    void withExistingAdGroupRightCampaign_create_keywordCreated() {
         Keyword keyword = new Keyword(123, 2, 6, 0, 0, 0d);
         int previousSize = keywordService.getAll().size();
         keywordService.create(keyword);
@@ -140,7 +139,7 @@ public class KeywordServiceTest {
     }
 
     @Test
-    public void withDefaultValues_getCostPerCampaign_correctValues() {
+    void withDefaultValues_getCostPerCampaign_correctValues() {
         Map<Integer, CostPerCampaign> costPerCampaignMap = keywordService.getCostPerCampaign();
 
         CostPerCampaign expectedCampaign0 = new CostPerCampaign(47.44, 9.0);

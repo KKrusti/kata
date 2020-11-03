@@ -8,7 +8,6 @@ import com.spaceboost.challenge.model.CostPerCampaign;
 import com.spaceboost.challenge.repository.CampaignRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Comparator;
@@ -35,12 +34,7 @@ public class CampaignService {
     }
 
     public Campaign getCampaign(int campaignId) {
-        Campaign campaign = campaignRepository.findById(campaignId);
-        if (campaign != null) {
-            return campaign;
-        } else {
-            throw new CampaignNotFoundException(campaignId);
-        }
+        return campaignRepository.findById(campaignId).orElseThrow(() -> new CampaignNotFoundException(campaignId));
     }
 
     public List<Campaign> getAll() {
@@ -69,7 +63,7 @@ public class CampaignService {
     }
 
     private void campaignIsNew(int campaignId) {
-        if (campaignRepository.findById(campaignId) != null) {
+        if (campaignRepository.findById(campaignId).isPresent()) {
             throw new IdExistsException("Campaign with id " + campaignId + " already exists");
         }
     }

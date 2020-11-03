@@ -8,7 +8,6 @@ import com.spaceboost.challenge.model.CostPerCampaign;
 import com.spaceboost.challenge.repository.AdGroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashMap;
@@ -19,6 +18,7 @@ import java.util.stream.Collectors;
 @Service
 public class AdGroupService {
 
+    @Autowired
     private AdGroupRepository adGroupRepository;
 
     @Autowired
@@ -30,12 +30,7 @@ public class AdGroupService {
     }
 
     public AdGroup getAdgroup(int adGroupId) {
-        AdGroup adGroup = adGroupRepository.findById(adGroupId);
-        if (adGroup != null) {
-            return adGroup;
-        } else {
-            throw new AdGroupNotFoundException(adGroupId);
-        }
+        return adGroupRepository.findById(adGroupId).orElseThrow(() -> new AdGroupNotFoundException(adGroupId));
     }
 
     public List<AdGroup> getAll() {
@@ -77,7 +72,7 @@ public class AdGroupService {
     }
 
     private void adGroupIsNew(int adGroupId) {
-        if (adGroupRepository.findById(adGroupId) != null) {
+        if (adGroupRepository.findById(adGroupId).isPresent()) {
             throw new IdExistsException("AdGroup with id " + adGroupId + " already exists");
         }
     }

@@ -13,14 +13,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {AdGroupService.class, Application.class})
-public class AdGroupServiceTest {
+class AdGroupServiceTest {
 
     private static final int EXISTING_ADGROUP_ID = 5;
     private static final int NON_EXISTING_ADGROUP_ID = 99999;
@@ -31,21 +30,21 @@ public class AdGroupServiceTest {
     private AdGroupService adGroupService;
 
     @Test
-    public void withExistingAdGroup_findById_adGroupFound() {
+    void withExistingAdGroup_findById_adGroupFound() {
         AdGroup retrievedAdGroup = adGroupService.getAdgroup(EXISTING_ADGROUP_ID);
         AdGroup expectedAdGroup = new AdGroup(EXISTING_ADGROUP_ID, 0, 54, 23, 28.17);
         Assertions.assertEquals(expectedAdGroup, retrievedAdGroup);
     }
 
     @Test
-    public void withNonExistingAdGroup_findById_exceptionThrown() {
+    void withNonExistingAdGroup_findById_exceptionThrown() {
         Assertions.assertThrows(AdGroupNotFoundException.class, () -> {
             adGroupService.getAdgroup(NON_EXISTING_ADGROUP_ID);
         });
     }
 
     @Test
-    public void withExistingCampaign_getAdGroupsForCampaign_getList() {
+    void withExistingCampaign_getAdGroupsForCampaign_getList() {
         List<AdGroup> adGroups = adGroupService.getAdGroupsForCampaign(1);
 
         List<AdGroup> expectedAdGroups = new ArrayList<>();
@@ -57,20 +56,20 @@ public class AdGroupServiceTest {
     }
 
     @Test
-    public void withWrongIdentifierCombination_getAdGroupWithCampaign_throwException() {
+    void withWrongIdentifierCombination_getAdGroupWithCampaign_throwException() {
         Assertions.assertThrows(WrongIdentifiersException.class, () ->
                 adGroupService.getAdGroupWithCampaign(1, 1));
     }
 
     @Test
-    public void getAll() {
+    void getAll() {
         List<AdGroup> adGroups = adGroupService.getAll();
 
         Assertions.assertEquals(INITIAL_ADGROUP_NUMBER, adGroups.size());
     }
 
     @Test
-    public void withNewAdGroup_create_adGroupCreated() {
+    void withNewAdGroup_create_adGroupCreated() {
         AdGroup adGroup = new AdGroup(50, 2, 1, 0, 0d);
         int initialSize = adGroupService.getAll().size();
         AdGroup createdAdgroup = adGroupService.create(adGroup);
@@ -81,19 +80,19 @@ public class AdGroupServiceTest {
     }
 
     @Test
-    public void withRepeatedId_create_errorThrown() {
+    void withRepeatedId_create_errorThrown() {
         AdGroup existingAdGroup = new AdGroup(1, 1, 1, 1, 1d);
         Assertions.assertThrows(IdExistsException.class, () -> adGroupService.create(existingAdGroup));
     }
 
     @Test
-    public void withNonExistingCampaign_create_errorThrown() {
+    void withNonExistingCampaign_create_errorThrown() {
         AdGroup adGroup = new AdGroup(512, 112, 1, 1, 1d);
         Assertions.assertThrows(CampaignNotFoundException.class, () -> adGroupService.create(adGroup));
     }
 
     @Test
-    public void withDefaultValues_getCostPerCampaign_correctValues() {
+    void withDefaultValues_getCostPerCampaign_correctValues() {
         Map<Integer, CostPerCampaign> costPerCampaignMap = adGroupService.getCostPerCampaign();
 
         CostPerCampaign expectedCampaign0 = new CostPerCampaign(441.97, 113.0);

@@ -12,7 +12,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = Application.class)
-public class ApplicationTests {
+class ApplicationTests {
 
     @Autowired
     private CampaignController campaignController;
@@ -24,7 +24,7 @@ public class ApplicationTests {
     private KeywordController keywordController;
 
     @Test
-    public void contextLoads() {
+    void contextLoads() {
         assertThat(campaignController).isNotNull();
         assertThat(adGroupController).isNotNull();
         assertThat(keywordController).isNotNull();

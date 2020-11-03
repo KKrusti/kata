@@ -9,7 +9,6 @@ import com.spaceboost.challenge.model.Keyword;
 import com.spaceboost.challenge.repository.KeywordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +18,6 @@ import java.util.stream.Collectors;
 @Service
 public class KeywordService {
 
-    @Autowired
     private KeywordRepository keywordRepository;
 
     @Autowired
@@ -31,12 +29,7 @@ public class KeywordService {
     }
 
     public Keyword getKeyword(int keywordId) {
-        Keyword keyword = keywordRepository.findById(keywordId);
-        if (keyword != null) {
-            return keyword;
-        } else {
-            throw new KeywordNotFoundException(keywordId);
-        }
+        return keywordRepository.findById(keywordId).orElseThrow(() -> new KeywordNotFoundException(keywordId));
     }
 
     public List<Keyword> getAll() {
@@ -82,7 +75,7 @@ public class KeywordService {
     }
 
     private void keywordIsNew(int keywordId) {
-        if (keywordRepository.findById(keywordId) != null) {
+        if (keywordRepository.findById(keywordId).isPresent()) {
             throw new IdExistsException("Keyword with id " + keywordId + " already exists");
         }
     }
