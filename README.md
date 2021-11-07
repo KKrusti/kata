@@ -1,6 +1,6 @@
-# Spaceboost code challenge
+# kata code challenge
 
-Welcome to the Spaceboost code challenge. We would like to have a restful API in order to manage the creation of our entities and obtain some statistics. 
+Welcome to the kata code challenge. We would like to have a restful API in order to manage the creation of our entities and obtain some statistics. 
 
 The challenge consists in a Java SpringBoot Application.
 

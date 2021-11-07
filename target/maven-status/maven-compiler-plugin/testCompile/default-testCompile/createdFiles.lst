@@ -1,1 +1,10 @@
-com\spaceboost\challenge\ApplicationTests.class
+com\kata\challenge\repository\CampaignRepositoryTest.class
+com\kata\challenge\repository\KeywordRepositoryTest.class
+com\kata\challenge\service\AdGroupServiceTest.class
+com\kata\challenge\controller\CampaignControllerTest.class
+com\kata\challenge\repository\AdGroupRepositoryTest.class
+com\kata\challenge\service\CampaignServiceTest.class
+com\kata\challenge\controller\AdGroupControllerTest.class
+com\kata\challenge\service\KeywordServiceTest.class
+com\kata\challenge\controller\KeywordControllerTest.class
+com\kata\challenge\ApplicationTests.class

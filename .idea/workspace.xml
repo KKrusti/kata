@@ -1,26 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="ba7f051f-3094-401d-8615-6090fd748980" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/controller/AdGroupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/controller/AdGroupController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/controller/KeywordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/controller/KeywordController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/exception/AdGroupNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/exception/AdGroupNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/exception/CampaignNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/exception/CampaignNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/exception/ExceptionHandlerAdvice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/exception/ExceptionHandlerAdvice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/exception/IdExistsException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/exception/IdExistsException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/exception/KeywordNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/exception/KeywordNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/exception/WrongIdentifiersException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/exception/WrongIdentifiersException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/model/ApiError.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/model/ApiError.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/spaceboost/challenge/controller/AdGroupControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/spaceboost/challenge/controller/AdGroupControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/spaceboost/challenge/controller/CampaignControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/spaceboost/challenge/controller/CampaignControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/spaceboost/challenge/controller/KeywordControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/spaceboost/challenge/controller/KeywordControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code-challenge.iml" beforeDir="false" afterPath="$PROJECT_DIR$/code-challenge.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kata/challenge/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/controller/AdGroupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kata/challenge/controller/AdGroupController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/controller/CampaignController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kata/challenge/controller/CampaignController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/controller/KeywordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kata/challenge/controller/KeywordController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/exception/AdGroupNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kata/challenge/exception/AdGroupNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/exception/CampaignNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kata/challenge/exception/CampaignNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/exception/ExceptionHandlerAdvice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kata/challenge/exception/ExceptionHandlerAdvice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/exception/IdExistsException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kata/challenge/exception/IdExistsException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/exception/KeywordNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kata/challenge/exception/KeywordNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/exception/WrongIdentifiersException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kata/challenge/exception/WrongIdentifiersException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/model/AdGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kata/challenge/model/AdGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/model/ApiError.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kata/challenge/model/ApiError.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/model/Campaign.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kata/challenge/model/Campaign.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/model/CostConversionRateResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kata/challenge/model/CostConversionRateResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/model/CostPerCampaign.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kata/challenge/model/CostPerCampaign.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/model/Keyword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kata/challenge/model/Keyword.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/repository/AdGroupRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kata/challenge/repository/AdGroupRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/repository/CampaignRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kata/challenge/repository/CampaignRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/repository/ChallengeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kata/challenge/repository/ChallengeRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/repository/KeywordRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kata/challenge/repository/KeywordRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/service/AdGroupService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kata/challenge/service/AdGroupService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/service/CampaignService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kata/challenge/service/CampaignService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/service/KeywordService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kata/challenge/service/KeywordService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/spaceboost/challenge/ApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/kata/challenge/ApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/spaceboost/challenge/controller/AdGroupControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/kata/challenge/controller/AdGroupControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/spaceboost/challenge/controller/CampaignControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/kata/challenge/controller/CampaignControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/spaceboost/challenge/controller/KeywordControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/kata/challenge/controller/KeywordControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/spaceboost/challenge/repository/AdGroupRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/kata/challenge/repository/AdGroupRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/spaceboost/challenge/repository/CampaignRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/kata/challenge/repository/CampaignRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/spaceboost/challenge/repository/KeywordRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/kata/challenge/repository/KeywordRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/spaceboost/challenge/service/AdGroupServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/kata/challenge/service/AdGroupServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/spaceboost/challenge/service/CampaignServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/kata/challenge/service/CampaignServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/spaceboost/challenge/service/KeywordServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/kata/challenge/service/KeywordServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/code-challenge.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/entities/adGroups.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entities/adGroups.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/entities/keywords.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entities/keywords.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
   </component>
   <component name="CoverageViewManager">
     <option name="myElementSize" value="493" />
@@ -39,20 +76,26 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="F:/development/apache-maven-3.6.1" />
+        <option name="mavenHome" value="C:\Users\Carlos\.m2\wrapper\dists\apache-maven-3.5.4-bin\jl1qqhdeineh9qg83dtj7i91c\apache-maven-3.5.4" />
       </MavenGeneralSettings>
     </option>
     <option name="importingSettings">
       <MavenImportingSettings>
-        <option name="importAutomatically" value="true" />
         <option name="jdkForImporter" value="1.8" />
         <option name="vmOptionsForImporter" value="-Xmx768m" />
       </MavenImportingSettings>
     </option>
   </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
   <component name="ProjectId" id="1P70dRXzw6AJ5TeYIoJ3BkpbFlF" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
@@ -60,17 +103,18 @@
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/test/java/com/spaceboost/challenge" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../development/codechallenge" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="settings.saveactions" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -90,20 +134,8 @@
       <recent name="com.spaceboost.challenge.service" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager" selected="JUnit.All in code-challenge">
-    <configuration name="AdGroupControllerTest.withNonExistingCampaign_createAdGroup_errorResponse" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.All in code-challenge (1)">
+    <configuration name="AdGroupControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="code-challenge" />
       <extension name="coverage">
         <pattern>
@@ -113,8 +145,15 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.spaceboost.challenge.controller" />
       <option name="MAIN_CLASS_NAME" value="com.spaceboost.challenge.controller.AdGroupControllerTest" />
-      <option name="METHOD_NAME" value="withNonExistingCampaign_createAdGroup_errorResponse" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in code-challenge (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="code-challenge" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -123,22 +162,6 @@
       <module name="code-challenge" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="KeywordControllerTest.withCorrectId_createKeyword_created" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="code-challenge" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.spaceboost.challenge.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.spaceboost.challenge.controller" />
-      <option name="MAIN_CLASS_NAME" value="com.spaceboost.challenge.controller.KeywordControllerTest" />
-      <option name="METHOD_NAME" value="withCorrectId_createKeyword_created" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -175,6 +198,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Application (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="code-challenge" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.kata.challenge.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="code-challenge" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.spaceboost.challenge.Application" />
@@ -184,14 +214,15 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in code-challenge (1)" />
+        <item itemvalue="JUnit.AdGroupControllerTest" />
         <item itemvalue="JUnit.All in code-challenge" />
         <item itemvalue="JUnit.KeywordControllerTest.withInconsistentCampaignAndAdGroup_createKeyword_errorResponse" />
         <item itemvalue="JUnit.KeywordControllerTest.withNonExistingAdGroup_createKeyword_errorResponse" />
-        <item itemvalue="JUnit.KeywordControllerTest.withCorrectId_createKeyword_created" />
-        <item itemvalue="JUnit.AdGroupControllerTest.withNonExistingCampaign_createAdGroup_errorResponse" />
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -217,24 +248,31 @@
       <workItem from="1565826601572" duration="1996000" />
       <workItem from="1565866432314" duration="22500000" />
       <workItem from="1565933485015" duration="17568000" />
+      <workItem from="1566158308764" duration="982000" />
+      <workItem from="1566402437153" duration="90000" />
+      <workItem from="1566402574376" duration="461000" />
+      <workItem from="1566403060420" duration="780000" />
+      <workItem from="1602949567650" duration="301000" />
+      <workItem from="1602950050736" duration="5593000" />
+      <workItem from="1604436644213" duration="313000" />
+      <workItem from="1636257204247" duration="284000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -243,32 +281,32 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/exception/WrongIdentifiersException.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/kata/challenge/exception/WrongIdentifiersException.java</url>
           <line>5</line>
           <option name="timeStamp" value="45" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/repository/AdGroupRepository.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/kata/challenge/repository/AdGroupRepository.java</url>
           <line>43</line>
           <option name="timeStamp" value="67" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/service/KeywordService.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/kata/challenge/service/KeywordService.java</url>
           <line>64</line>
           <option name="timeStamp" value="76" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/service/KeywordService.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/kata/challenge/service/KeywordService.java</url>
           <line>65</line>
           <option name="timeStamp" value="77" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/service/KeywordService.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/kata/challenge/service/KeywordService.java</url>
           <line>66</line>
           <option name="timeStamp" value="78" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/spaceboost/challenge/service/KeywordServiceTest.java</url>
+          <url>file://$PROJECT_DIR$/src/test/java/com/kata/challenge/service/KeywordServiceTest.java</url>
           <line>120</line>
           <properties>
             <option name="lambda-ordinal" value="-1" />
@@ -276,27 +314,27 @@
           <option name="timeStamp" value="79" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/service/KeywordService.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/kata/challenge/service/KeywordService.java</url>
           <line>70</line>
           <option name="timeStamp" value="80" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/service/KeywordService.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/kata/challenge/service/KeywordService.java</url>
           <line>71</line>
           <option name="timeStamp" value="81" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/spaceboost/challenge/service/KeywordService.java</url>
+          <url>file://$PROJECT_DIR$/src/main/java/com/kata/challenge/service/KeywordService.java</url>
           <line>86</line>
           <option name="timeStamp" value="82" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/spaceboost/challenge/service/KeywordServiceTest.java</url>
+          <url>file://$PROJECT_DIR$/src/test/java/com/kata/challenge/service/KeywordServiceTest.java</url>
           <line>119</line>
           <option name="timeStamp" value="84" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/spaceboost/challenge/controller/KeywordControllerTest.java</url>
+          <url>file://$PROJECT_DIR$/src/test/java/com/kata/challenge/controller/KeywordControllerTest.java</url>
           <line>107</line>
           <option name="timeStamp" value="91" />
         </line-breakpoint>
@@ -304,6 +342,6 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/code_challenge$All_in_code_challenge.ic" NAME="All in code-challenge Coverage Results" MODIFIED="1565993578522" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/code_challenge$All_in_code_challenge.ic" NAME="All in code-challenge Coverage Results" MODIFIED="1566158392656" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
