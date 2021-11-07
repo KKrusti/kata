@@ -9,7 +9,6 @@ import com.kata.challenge.model.Keyword;
 import com.kata.challenge.repository.KeywordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +18,6 @@ import java.util.stream.Collectors;
 @Service
 public class KeywordService {
 
-    @Autowired
     private KeywordRepository keywordRepository;
 
     @Autowired
@@ -31,12 +29,7 @@ public class KeywordService {
     }
 
     public Keyword getKeyword(int keywordId) {
-        Keyword keyword = keywordRepository.findById(keywordId);
-        if (keyword != null) {
-            return keyword;
-        } else {
-            throw new KeywordNotFoundException(keywordId);
-        }
+        return keywordRepository.findById(keywordId).orElseThrow(() -> new KeywordNotFoundException(keywordId));
     }
 
     public List<Keyword> getAll() {
@@ -75,14 +68,14 @@ public class KeywordService {
         return costAndConversionMap;
     }
 
-    public Keyword create(Keyword keyword) {
+    public Keyword create(Keyword keyword) throws AdGroupNotFoundException {
         keywordIsNew(keyword.getId());
         adGroupAndCampaignExist(keyword.getCampaignId(), keyword.getAdGroupId());
         return keywordRepository.add(keyword);
     }
 
     private void keywordIsNew(int keywordId) {
-        if (keywordRepository.findById(keywordId) != null) {
+        if (keywordRepository.findById(keywordId).isPresent()) {
             throw new IdExistsException("Keyword with id " + keywordId + " already exists");
         }
     }
@@ -97,7 +90,7 @@ public class KeywordService {
      * @throws AdGroupNotFoundException  if the AdGroup doesn't exist
      * @throws WrongIdentifiersException if there's a mismatch between campaignId of the keyword and the campaignId of the AdGroup
      */
-    private void adGroupAndCampaignExist(int campaignId, int adGroupId) {
+    private void adGroupAndCampaignExist(int campaignId, int adGroupId) throws AdGroupNotFoundException{
         adGroupService.getAdGroupWithCampaign(campaignId, adGroupId);
     }
 
